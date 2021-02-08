@@ -1,8 +1,8 @@
 ﻿insert into addressTable VALUES
-(1,'Heights','Cartonas',1),
+(1,'Heights','Cartonas',1,1),
 (2,'Brooklawn','Sarsat',1,5),
 (3,'Tanners','New York',1,9),
-(4,'Brooklawn','Sarsat',1),
+(4,'Brooklawn','Sarsat',1,2),
 (5,'Lister','Balminster',1,15);
 
 insert into worker VALUES
@@ -31,14 +31,13 @@ insert into delivery_type VALUES
 (3,'Parcel post',4);
 
 insert into customer VALUES
-(1,'Keagan','Hilton',1,111222333),
-(2,'Matas','Cresswell',3,333444555,999999999);
+(1,'Matas','Cresswell',3,22222222,'test@gmail.com',777777777),
+(2,'Philip','Cromwell',1,111111111,'test2@gmail.com',999999999);
 
 insert into product VALUES
 (1,'Mini',4,1,1000,800),
 (2,'MK3s',1,1,500,340);
 
 insert into orderTable VALUES
-(1,1,3,1,'2020-01-11'),
-(2,2,1,2,'2021-01-02');
-
+(1,1,3,1,1,'2020-01-11'),
+(2,2,1,2,2,'2021-01-02');

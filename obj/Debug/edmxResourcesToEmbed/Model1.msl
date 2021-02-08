@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Database1ModelStoreContainer" CdmEntityContainer="Database1Entities">
+    <EntitySetMapping Name="addressTable">
+      <EntityTypeMapping TypeName="Database1Model.addressTable">
+        <MappingFragment StoreEntitySet="addressTable">
+          <ScalarProperty Name="address_id" ColumnName="address_id" />
+          <ScalarProperty Name="address_city" ColumnName="address_city" />
+          <ScalarProperty Name="address_street" ColumnName="address_street" />
+          <ScalarProperty Name="address_home_no" ColumnName="address_home_no" />
+          <ScalarProperty Name="address_flat_no" ColumnName="address_flat_no" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="category">
+      <EntityTypeMapping TypeName="Database1Model.category">
+        <MappingFragment StoreEntitySet="category">
+          <ScalarProperty Name="category_id" ColumnName="category_id" />
+          <ScalarProperty Name="category_name" ColumnName="category_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="customer">
+      <EntityTypeMapping TypeName="Database1Model.customer">
+        <MappingFragment StoreEntitySet="customer">
+          <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+          <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+          <ScalarProperty Name="customer_surename" ColumnName="customer_surename" />
+          <ScalarProperty Name="customer_address_id" ColumnName="customer_address_id" />
+          <ScalarProperty Name="customer_phone" ColumnName="customer_phone" />
+          <ScalarProperty Name="customer_email" ColumnName="customer_email" />
+          <ScalarProperty Name="customer_nip" ColumnName="customer_nip" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="delivery_type">
+      <EntityTypeMapping TypeName="Database1Model.delivery_type">
+        <MappingFragment StoreEntitySet="delivery_type">
+          <ScalarProperty Name="delivery_type_id" ColumnName="delivery_type_id" />
+          <ScalarProperty Name="delivery_type1" ColumnName="delivery_type" />
+          <ScalarProperty Name="delivery_cost" ColumnName="delivery_cost" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="manufacturer">
+      <EntityTypeMapping TypeName="Database1Model.manufacturer">
+        <MappingFragment StoreEntitySet="manufacturer">
+          <ScalarProperty Name="manufacturer_id" ColumnName="manufacturer_id" />
+          <ScalarProperty Name="manufacturer_name" ColumnName="manufacturer_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="orderTable">
+      <EntityTypeMapping TypeName="Database1Model.orderTable">
+        <MappingFragment StoreEntitySet="orderTable">
+          <ScalarProperty Name="order_id" ColumnName="order_id" />
+          <ScalarProperty Name="order_product_id" ColumnName="order_product_id" />
+          <ScalarProperty Name="order_delivery_type_id" ColumnName="order_delivery_type_id" />
+          <ScalarProperty Name="order_customer_id" ColumnName="order_customer_id" />
+          <ScalarProperty Name="order_worker_id" ColumnName="order_worker_id" />
+          <ScalarProperty Name="order_date" ColumnName="order_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="product">
+      <EntityTypeMapping TypeName="Database1Model.product">
+        <MappingFragment StoreEntitySet="product">
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="product_name" ColumnName="product_name" />
+          <ScalarProperty Name="product_manufacturer" ColumnName="product_manufacturer" />
+          <ScalarProperty Name="product_category_id" ColumnName="product_category_id" />
+          <ScalarProperty Name="product_price" ColumnName="product_price" />
+          <ScalarProperty Name="product_cost" ColumnName="product_cost" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="worker">
+      <EntityTypeMapping TypeName="Database1Model.worker">
+        <MappingFragment StoreEntitySet="worker">
+          <ScalarProperty Name="worker_id" ColumnName="worker_id" />
+          <ScalarProperty Name="worker_pesel" ColumnName="worker_pesel" />
+          <ScalarProperty Name="worker_name" ColumnName="worker_name" />
+          <ScalarProperty Name="worker_surename" ColumnName="worker_surename" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

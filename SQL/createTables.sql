@@ -35,7 +35,7 @@ customer_name varchar (30) NOT NULL,
 customer_surename varchar (30) NOT NULL,
 customer_address_id int foreign key references addressTable(address_id) NOT NULL,
 customer_phone int NOT NULL,
-customer_email varchar (25),
+customer_email varchar (25) null,
 customer_nip nchar(9) null
 );
 
@@ -53,5 +53,6 @@ order_id int primary key,
 order_product_id int foreign key references product(product_id) NOT NULL,
 order_delivery_type_id int foreign key references delivery_type(delivery_type_id) NOT NULL,
 order_customer_id int foreign key references customer(customer_id) NOT NULL,
+order_worker_id int foreign key references worker(worker_id) NOT NULL,
 order_date datetime NOT NULL,
 );
