@@ -21,3 +21,6 @@ E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\bin\Debug\EntityFramework.SqlSer
 E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\bin\Debug\EntityFramework.xml
 E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\bin\Debug\EntityFramework.SqlServer.xml
 E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\obj\Debug\SemesterProject_WPF_DB.csproj.CopyComplete
+E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\obj\Debug\Window2.g.cs
+E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\obj\Debug\Window2.baml
+E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\obj\Debug\GeneratedInternalTypeHelper.g.cs

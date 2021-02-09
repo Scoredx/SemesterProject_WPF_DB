@@ -10,14 +10,14 @@
 namespace SemesterProject_WPF_DB
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class customer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public customer()
         {
-            this.orderTable = new HashSet<orderTable>();
+            this.orderTable = new ObservableCollection<orderTable>();
         }
     
         public int customer_id { get; set; }
@@ -30,6 +30,6 @@ namespace SemesterProject_WPF_DB
     
         public virtual addressTable addressTable { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<orderTable> orderTable { get; set; }
+        public virtual ObservableCollection<orderTable> orderTable { get; set; }
     }
 }

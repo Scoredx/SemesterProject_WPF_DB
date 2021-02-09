@@ -10,14 +10,14 @@
 namespace SemesterProject_WPF_DB
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class addressTable
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public addressTable()
         {
-            this.customer = new HashSet<customer>();
+            this.customer = new ObservableCollection<customer>();
         }
     
         public int address_id { get; set; }
@@ -27,6 +27,6 @@ namespace SemesterProject_WPF_DB
         public Nullable<int> address_flat_no { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<customer> customer { get; set; }
+        public virtual ObservableCollection<customer> customer { get; set; }
     }
 }

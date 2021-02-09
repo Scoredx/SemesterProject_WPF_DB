@@ -10,20 +10,20 @@
 namespace SemesterProject_WPF_DB
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class manufacturer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public manufacturer()
         {
-            this.product = new HashSet<product>();
+            this.product = new ObservableCollection<product>();
         }
     
         public int manufacturer_id { get; set; }
         public string manufacturer_name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<product> product { get; set; }
+        public virtual ObservableCollection<product> product { get; set; }
     }
 }
