@@ -13,10 +13,10 @@ namespace SemesterProject_WPF_DB
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Database1Entities : DbContext
+    public partial class Database1Entities1 : DbContext
     {
-        public Database1Entities()
-            : base("name=Database1Entities")
+        public Database1Entities1()
+            : base("name=Database1Entities1")
         {
         }
     
@@ -26,10 +26,8 @@ namespace SemesterProject_WPF_DB
         }
     
         public virtual DbSet<addressTable> addressTable { get; set; }
-        public virtual DbSet<category> category { get; set; }
         public virtual DbSet<customer> customer { get; set; }
         public virtual DbSet<delivery_type> delivery_type { get; set; }
-        public virtual DbSet<manufacturer> manufacturer { get; set; }
         public virtual DbSet<orderTable> orderTable { get; set; }
         public virtual DbSet<product> product { get; set; }
         public virtual DbSet<worker> worker { get; set; }

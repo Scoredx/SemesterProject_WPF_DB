@@ -4,92 +4,74 @@
     <Key>
       <PropertyRef Name="address_id" />
     </Key>
-    <Property Name="address_id" Type="Int32" Nullable="false" />
+    <Property Name="address_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="address_city" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="address_street" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="address_home_no" Type="Int32" Nullable="false" />
     <Property Name="address_flat_no" Type="Int32" />
-    <NavigationProperty Name="customer" Relationship="Self.FK__customer__custom__2E1BDC42" FromRole="addressTable" ToRole="customer" />
-  </EntityType>
-  <EntityType Name="category">
-    <Key>
-      <PropertyRef Name="category_id" />
-    </Key>
-    <Property Name="category_id" Type="Int32" Nullable="false" />
-    <Property Name="category_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="product" Relationship="Self.FK__product__product__31EC6D26" FromRole="category" ToRole="product" />
+    <NavigationProperty Name="customer" Relationship="Self.FK__customer__custom__2A4B4B5E" FromRole="addressTable" ToRole="customer" />
   </EntityType>
   <EntityType Name="customer">
     <Key>
       <PropertyRef Name="customer_id" />
     </Key>
-    <Property Name="customer_id" Type="Int32" Nullable="false" />
+    <Property Name="customer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="customer_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="customer_surename" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="customer_surename" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <Property Name="customer_address_id" Type="Int32" Nullable="false" />
     <Property Name="customer_phone" Type="Int32" Nullable="false" />
     <Property Name="customer_email" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
     <Property Name="customer_nip" Type="String" MaxLength="9" FixedLength="true" Unicode="true" />
-    <NavigationProperty Name="addressTable" Relationship="Self.FK__customer__custom__2E1BDC42" FromRole="customer" ToRole="addressTable" />
-    <NavigationProperty Name="orderTable" Relationship="Self.FK__orderTabl__order__36B12243" FromRole="customer" ToRole="orderTable" />
+    <NavigationProperty Name="addressTable" Relationship="Self.FK__customer__custom__2A4B4B5E" FromRole="customer" ToRole="addressTable" />
+    <NavigationProperty Name="orderTable" Relationship="Self.FK__orderTabl__order__30F848ED" FromRole="customer" ToRole="orderTable" />
   </EntityType>
   <EntityType Name="delivery_type">
     <Key>
       <PropertyRef Name="delivery_type_id" />
     </Key>
-    <Property Name="delivery_type_id" Type="Int32" Nullable="false" />
+    <Property Name="delivery_type_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="delivery_type1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="delivery_cost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-    <NavigationProperty Name="orderTable" Relationship="Self.FK__orderTabl__order__35BCFE0A" FromRole="delivery_type" ToRole="orderTable" />
-  </EntityType>
-  <EntityType Name="manufacturer">
-    <Key>
-      <PropertyRef Name="manufacturer_id" />
-    </Key>
-    <Property Name="manufacturer_id" Type="Int32" Nullable="false" />
-    <Property Name="manufacturer_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="product" Relationship="Self.FK__product__product__30F848ED" FromRole="manufacturer" ToRole="product" />
+    <NavigationProperty Name="orderTable" Relationship="Self.FK__orderTabl__order__300424B4" FromRole="delivery_type" ToRole="orderTable" />
   </EntityType>
   <EntityType Name="orderTable">
     <Key>
       <PropertyRef Name="order_id" />
     </Key>
-    <Property Name="order_id" Type="Int32" Nullable="false" />
+    <Property Name="order_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="order_product_id" Type="Int32" Nullable="false" />
     <Property Name="order_delivery_type_id" Type="Int32" Nullable="false" />
     <Property Name="order_customer_id" Type="Int32" Nullable="false" />
     <Property Name="order_worker_id" Type="Int32" Nullable="false" />
     <Property Name="order_date" Type="DateTime" Nullable="false" Precision="3" />
-    <NavigationProperty Name="customer" Relationship="Self.FK__orderTabl__order__36B12243" FromRole="orderTable" ToRole="customer" />
-    <NavigationProperty Name="delivery_type" Relationship="Self.FK__orderTabl__order__35BCFE0A" FromRole="orderTable" ToRole="delivery_type" />
-    <NavigationProperty Name="product" Relationship="Self.FK__orderTabl__order__34C8D9D1" FromRole="orderTable" ToRole="product" />
-    <NavigationProperty Name="worker" Relationship="Self.FK__orderTabl__order__37A5467C" FromRole="orderTable" ToRole="worker" />
+    <NavigationProperty Name="customer" Relationship="Self.FK__orderTabl__order__30F848ED" FromRole="orderTable" ToRole="customer" />
+    <NavigationProperty Name="delivery_type" Relationship="Self.FK__orderTabl__order__300424B4" FromRole="orderTable" ToRole="delivery_type" />
+    <NavigationProperty Name="product" Relationship="Self.FK__orderTabl__order__2F10007B" FromRole="orderTable" ToRole="product" />
+    <NavigationProperty Name="worker" Relationship="Self.FK__orderTabl__order__31EC6D26" FromRole="orderTable" ToRole="worker" />
   </EntityType>
   <EntityType Name="product">
     <Key>
       <PropertyRef Name="product_id" />
     </Key>
-    <Property Name="product_id" Type="Int32" Nullable="false" />
+    <Property Name="product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="product_manufacturer_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="product_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="product_manufacturer" Type="Int32" Nullable="false" />
-    <Property Name="product_category_id" Type="Int32" Nullable="false" />
+    <Property Name="product_category_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="product_price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
     <Property Name="product_cost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-    <NavigationProperty Name="category" Relationship="Self.FK__product__product__31EC6D26" FromRole="product" ToRole="category" />
-    <NavigationProperty Name="manufacturer" Relationship="Self.FK__product__product__30F848ED" FromRole="product" ToRole="manufacturer" />
-    <NavigationProperty Name="orderTable" Relationship="Self.FK__orderTabl__order__34C8D9D1" FromRole="product" ToRole="orderTable" />
+    <NavigationProperty Name="orderTable" Relationship="Self.FK__orderTabl__order__2F10007B" FromRole="product" ToRole="orderTable" />
   </EntityType>
   <EntityType Name="worker">
     <Key>
       <PropertyRef Name="worker_id" />
     </Key>
-    <Property Name="worker_id" Type="Int32" Nullable="false" />
+    <Property Name="worker_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="worker_pesel" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="worker_name" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="worker_surename" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="orderTable" Relationship="Self.FK__orderTabl__order__37A5467C" FromRole="worker" ToRole="orderTable" />
+    <NavigationProperty Name="orderTable" Relationship="Self.FK__orderTabl__order__31EC6D26" FromRole="worker" ToRole="orderTable" />
   </EntityType>
-  <Association Name="FK__customer__custom__2E1BDC42">
+  <Association Name="FK__customer__custom__2A4B4B5E">
     <End Role="addressTable" Type="Self.addressTable" Multiplicity="1" />
     <End Role="customer" Type="Self.customer" Multiplicity="*" />
     <ReferentialConstraint>
@@ -101,19 +83,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__product__product__31EC6D26">
-    <End Role="category" Type="Self.category" Multiplicity="1" />
-    <End Role="product" Type="Self.product" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="category">
-        <PropertyRef Name="category_id" />
-      </Principal>
-      <Dependent Role="product">
-        <PropertyRef Name="product_category_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__orderTabl__order__36B12243">
+  <Association Name="FK__orderTabl__order__30F848ED">
     <End Role="customer" Type="Self.customer" Multiplicity="1" />
     <End Role="orderTable" Type="Self.orderTable" Multiplicity="*" />
     <ReferentialConstraint>
@@ -125,7 +95,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__orderTabl__order__35BCFE0A">
+  <Association Name="FK__orderTabl__order__300424B4">
     <End Role="delivery_type" Type="Self.delivery_type" Multiplicity="1" />
     <End Role="orderTable" Type="Self.orderTable" Multiplicity="*" />
     <ReferentialConstraint>
@@ -137,19 +107,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__product__product__30F848ED">
-    <End Role="manufacturer" Type="Self.manufacturer" Multiplicity="1" />
-    <End Role="product" Type="Self.product" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="manufacturer">
-        <PropertyRef Name="manufacturer_id" />
-      </Principal>
-      <Dependent Role="product">
-        <PropertyRef Name="product_manufacturer" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__orderTabl__order__34C8D9D1">
+  <Association Name="FK__orderTabl__order__2F10007B">
     <End Role="product" Type="Self.product" Multiplicity="1" />
     <End Role="orderTable" Type="Self.orderTable" Multiplicity="*" />
     <ReferentialConstraint>
@@ -161,7 +119,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__orderTabl__order__37A5467C">
+  <Association Name="FK__orderTabl__order__31EC6D26">
     <End Role="worker" Type="Self.worker" Multiplicity="1" />
     <End Role="orderTable" Type="Self.orderTable" Multiplicity="*" />
     <ReferentialConstraint>
@@ -173,40 +131,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="Database1Entities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="Database1Entities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="addressTable" EntityType="Self.addressTable" />
-    <EntitySet Name="category" EntityType="Self.category" />
     <EntitySet Name="customer" EntityType="Self.customer" />
     <EntitySet Name="delivery_type" EntityType="Self.delivery_type" />
-    <EntitySet Name="manufacturer" EntityType="Self.manufacturer" />
     <EntitySet Name="orderTable" EntityType="Self.orderTable" />
     <EntitySet Name="product" EntityType="Self.product" />
     <EntitySet Name="worker" EntityType="Self.worker" />
-    <AssociationSet Name="FK__customer__custom__2E1BDC42" Association="Self.FK__customer__custom__2E1BDC42">
+    <AssociationSet Name="FK__customer__custom__2A4B4B5E" Association="Self.FK__customer__custom__2A4B4B5E">
       <End Role="addressTable" EntitySet="addressTable" />
       <End Role="customer" EntitySet="customer" />
     </AssociationSet>
-    <AssociationSet Name="FK__product__product__31EC6D26" Association="Self.FK__product__product__31EC6D26">
-      <End Role="category" EntitySet="category" />
-      <End Role="product" EntitySet="product" />
-    </AssociationSet>
-    <AssociationSet Name="FK__orderTabl__order__36B12243" Association="Self.FK__orderTabl__order__36B12243">
+    <AssociationSet Name="FK__orderTabl__order__30F848ED" Association="Self.FK__orderTabl__order__30F848ED">
       <End Role="customer" EntitySet="customer" />
       <End Role="orderTable" EntitySet="orderTable" />
     </AssociationSet>
-    <AssociationSet Name="FK__orderTabl__order__35BCFE0A" Association="Self.FK__orderTabl__order__35BCFE0A">
+    <AssociationSet Name="FK__orderTabl__order__300424B4" Association="Self.FK__orderTabl__order__300424B4">
       <End Role="delivery_type" EntitySet="delivery_type" />
       <End Role="orderTable" EntitySet="orderTable" />
     </AssociationSet>
-    <AssociationSet Name="FK__product__product__30F848ED" Association="Self.FK__product__product__30F848ED">
-      <End Role="manufacturer" EntitySet="manufacturer" />
-      <End Role="product" EntitySet="product" />
-    </AssociationSet>
-    <AssociationSet Name="FK__orderTabl__order__34C8D9D1" Association="Self.FK__orderTabl__order__34C8D9D1">
+    <AssociationSet Name="FK__orderTabl__order__2F10007B" Association="Self.FK__orderTabl__order__2F10007B">
       <End Role="product" EntitySet="product" />
       <End Role="orderTable" EntitySet="orderTable" />
     </AssociationSet>
-    <AssociationSet Name="FK__orderTabl__order__37A5467C" Association="Self.FK__orderTabl__order__37A5467C">
+    <AssociationSet Name="FK__orderTabl__order__31EC6D26" Association="Self.FK__orderTabl__order__31EC6D26">
       <End Role="worker" EntitySet="worker" />
       <End Role="orderTable" EntitySet="orderTable" />
     </AssociationSet>

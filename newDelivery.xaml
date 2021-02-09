@@ -1,0 +1,53 @@
+﻿<Window x:Class="SemesterProject_WPF_DB.newDelivery"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SemesterProject_WPF_DB"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+        Title="TSM: New Delivery" Height="400" Width="807.692" Icon="logo.ico" Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="productViewSource" d:DesignSource="{d:DesignInstance {x:Type local:product}, CreateList=True}"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource productViewSource}" >
+        <Button x:Name="button_productDelete" Content="Delete Record" FontSize="11" Margin="623,184,10,140"/>
+        <Button x:Name="button_productNewProduct" Content="New Product"  FontSize="11" Margin="309,186,373,138"/>
+        <Button x:Name="button_productCancel" Content="Cancel"   FontSize="11" Margin="701,309,10,10"/>
+        <Button x:Name="button_productUpdate" Content="Commit" FontSize="11"  Margin="701,251,9,67"/>
+        <Grid x:Name="grid1" DataContext="{StaticResource productViewSource}" HorizontalAlignment="Left" Margin="11,186,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="Category:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="product_category_nameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding product_category_name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Cost:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,32,0,-26" Grid.Row="5" VerticalAlignment="Center"/>
+            <TextBox x:Name="product_costTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="3,34,0,-24" Grid.Row="5" Text="{Binding product_cost, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Manufacturer:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+            <TextBox x:Name="product_manufacturer_nameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3" Text="{Binding product_manufacturer_name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Product Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,4,0,2" Grid.Row="4" VerticalAlignment="Center"/>
+            <TextBox x:Name="product_nameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="4" Text="{Binding product_name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Price:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
+            <TextBox x:Name="product_priceTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="5" Text="{Binding product_price, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+        </Grid>
+        <DataGrid x:Name="productDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,10,10,192" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="product_category_nameColumn" Binding="{Binding product_category_name}" Header="product category name" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="product_costColumn" Binding="{Binding product_cost}" Header="product cost" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="product_idColumn" Binding="{Binding product_id}" Header="product id" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="product_manufacturer_nameColumn" Binding="{Binding product_manufacturer_name}" Header="product manufacturer name" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="product_nameColumn" Binding="{Binding product_name}" Header="product name" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="product_priceColumn" Binding="{Binding product_price}" Header="product price" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

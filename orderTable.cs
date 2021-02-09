@@ -10,7 +10,7 @@
 namespace SemesterProject_WPF_DB
 {
     using System;
-    using System.Collections.ObjectModel;
+    using System.Collections.Generic;
     
     public partial class orderTable
     {

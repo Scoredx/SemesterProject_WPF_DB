@@ -22,7 +22,7 @@ namespace SemesterProject_WPF_DB
     /// </summary>
     public partial class MainWindow : Window
     {
-        Database1Entities context = new Database1Entities();
+        Database1Entities1 context = new Database1Entities1();
         CollectionViewSource custViewSource;
         CollectionViewSource ordViewSource;
         public MainWindow()
@@ -41,17 +41,37 @@ namespace SemesterProject_WPF_DB
             custViewSource.Source = context.customer.Local;
            
         }
-        private void button_openDBViewer(object sender, RoutedEventArgs e)
+      
+        private void newDelivery_button(object sender, RoutedEventArgs e)
         {
-            Window2 win2 = new Window2();
-            win2.Show();
+            newDelivery newDelivery = new newDelivery();
+            newDelivery.Show();
         }
 
-        private void button_newDelivery(object sender, RoutedEventArgs e)
+        private void productManager_button(object sender, RoutedEventArgs e)
         {
-
+            productManager productManager = new productManager();
+            productManager.Show();
         }
-        private void button_exit(object sender, RoutedEventArgs e)
+        private void orderManager_button(object sender, RoutedEventArgs e)
+        {
+            orderManager orderManager = new orderManager();
+            orderManager.Show();
+        }
+
+        private void customerManager_button(object sender, RoutedEventArgs e)
+        {
+            customerManager customerManager = new customerManager();
+            customerManager.Show();
+        }
+
+        private void staffManager_button(object sender, RoutedEventArgs e)
+        {
+            staffManager staffManager = new staffManager();
+            staffManager.Show();
+        }
+
+        private void exit_button(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }

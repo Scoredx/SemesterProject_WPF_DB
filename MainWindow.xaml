@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:SemesterProject_WPF_DB"
         mc:Ignorable="d"        
         ResizeMode="NoResize"
-        Title="Techmaker ShopManager" Height="629" Width="629" Loaded="Window_Loaded" Icon="logo.ico">
+        WindowStartupLocation="CenterScreen"
+        Title="Techmaker ShopManager" Height="509" Width="500" Loaded="Window_Loaded" Icon="logo.ico" ShowInTaskbar="False">
     <Window.Resources>
         <CollectionViewSource x:Key="customerViewSource" d:DesignSource="{d:DesignInstance {x:Type local:customer}, CreateList=True}"/>
         <CollectionViewSource x:Key="customerorderTableViewSource" Source="{Binding orderTable, Source={StaticResource customerViewSource}}"/>
@@ -24,18 +25,54 @@
             <Setter Property="Width" Value="120"/>
         </Style>
     </Window.Resources>
-    <Grid DataContext="{StaticResource customerorderTableViewSource}" Margin="0,0,2,2">
+    <Grid Margin="0,0,0,0" Background="#FF2F86AE">
         <Grid.RowDefinitions>
             <RowDefinition Height="567"/>
         </Grid.RowDefinitions>
-        <Image Margin="117,17,0,344" Source="background.png" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Center" Height="206" Width="366"/>
-        <Button Content="EXIT" Margin="0,384,138,0" VerticalAlignment="Top" Width="108" Click="button_exit" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Height="60"/>
-        <Button Content="New Delivery" HorizontalAlignment="Left" Height="60" Margin="117,254,0,0" VerticalAlignment="Top" Width="108" Click="button_newDelivery"/>
-        <Button Content="Product Manager" HorizontalAlignment="Left" Height="60" Margin="117,318,0,0" VerticalAlignment="Top" Width="108"/>
-        <Button Content="Order Manager" HorizontalAlignment="Left" Height="60" Margin="117,384,0,0" VerticalAlignment="Top" Width="108"/>
-        <Button Content="Staff" HorizontalAlignment="Left" Height="60" Margin="375,320,0,0" VerticalAlignment="Top" Width="108"/>
-        <Button Content="Customers" HorizontalAlignment="Left" Height="60" Margin="375,254,0,0" VerticalAlignment="Top" Width="108"/>
-        <Label Content="Products" HorizontalAlignment="Left" Height="24" Margin="117,224,0,0" VerticalAlignment="Top" Width="108" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold"/>
-        <Label Content="HR" HorizontalAlignment="Left" Height="26" Margin="375,224,0,0" VerticalAlignment="Top" Width="108" HorizontalContentAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold"/>
+        <Image Margin="60,12,0,349" Source="background.png" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Center" Height="206" Width="366"/>
+        <Button x:Name="button_exit" Content="EXIT" Margin="272,384,0,0" Width="108" Click="exit_button" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="60" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Background="White" FontFamily="Consolas">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="button_newDelivery" Content="  New&#xD;&#xA;Delivery" HorizontalAlignment="Left" Height="60" Margin="110,254,0,0" VerticalAlignment="Top" Width="108" Click="newDelivery_button" Background="White" FontWeight="Bold" FontFamily="Consolas" FontSize="14" TextOptions.TextHintingMode="Fixed" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="button_productManager" Content="Product&#xD;&#xA;Manager" HorizontalAlignment="Left" Height="60" Margin="110,319,0,0" VerticalAlignment="Top" Width="108" Click="productManager_button" Background="White" FontWeight="Bold" FontFamily="Consolas" FontSize="14">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="button_orderManager" Content=" Order&#xD;&#xA;Manager" HorizontalAlignment="Left" Height="60" Margin="110,384,0,0" VerticalAlignment="Top" Width="108" Click="orderManager_button" Background="White" FontWeight="Bold" FontFamily="Consolas" FontSize="14">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="button_staffManager" Content="Staff" HorizontalAlignment="Left" Height="60" Margin="272,318,0,0" VerticalAlignment="Top" Width="108" Click="staffManager_button" Background="White" FontWeight="Bold" FontFamily="Consolas" FontSize="14">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="button_customerManager" Content="Customers" HorizontalAlignment="Left" Height="60" Margin="272,253,0,0" VerticalAlignment="Top" Width="108" Click="customerManager_button" Background="White" FontWeight="Bold" FontFamily="Consolas" FontSize="14">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Label Content="Products" HorizontalAlignment="Left" Height="30" Margin="110,223,0,0" VerticalAlignment="Top" Width="108" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Arial" FontSize="16" FontWeight="Bold"/>
+        <Label Content="HR" HorizontalAlignment="Left" Height="30" Margin="272,223,0,0" VerticalAlignment="Top" Width="108" HorizontalContentAlignment="Center" FontFamily="Arial" FontSize="16" FontWeight="Bold"/>
     </Grid>
 </Window>

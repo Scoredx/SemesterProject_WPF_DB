@@ -10,26 +10,24 @@
 namespace SemesterProject_WPF_DB
 {
     using System;
-    using System.Collections.ObjectModel;
+    using System.Collections.Generic;
     
     public partial class product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public product()
         {
-            this.orderTable = new ObservableCollection<orderTable>();
+            this.orderTable = new HashSet<orderTable>();
         }
     
         public int product_id { get; set; }
+        public string product_manufacturer_name { get; set; }
         public string product_name { get; set; }
-        public int product_manufacturer { get; set; }
-        public int product_category_id { get; set; }
+        public string product_category_name { get; set; }
         public decimal product_price { get; set; }
         public decimal product_cost { get; set; }
     
-        public virtual category category { get; set; }
-        public virtual manufacturer manufacturer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ObservableCollection<orderTable> orderTable { get; set; }
+        public virtual ICollection<orderTable> orderTable { get; set; }
     }
 }

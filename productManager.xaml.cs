@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace SemesterProject_WPF_DB
 {
     /// <summary>
-    /// Interaction logic for Window2.xaml
+    /// Interaction logic for productManager.xaml
     /// </summary>
-    public partial class Window2 : Window
+    public partial class productManager : Window
     {
-        public Window2()
+        public productManager()
         {
             InitializeComponent();
         }

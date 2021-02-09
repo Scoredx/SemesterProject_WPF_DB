@@ -10,14 +10,14 @@
 namespace SemesterProject_WPF_DB
 {
     using System;
-    using System.Collections.ObjectModel;
+    using System.Collections.Generic;
     
     public partial class delivery_type
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public delivery_type()
         {
-            this.orderTable = new ObservableCollection<orderTable>();
+            this.orderTable = new HashSet<orderTable>();
         }
     
         public int delivery_type_id { get; set; }
@@ -25,6 +25,6 @@ namespace SemesterProject_WPF_DB
         public decimal delivery_cost { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ObservableCollection<orderTable> orderTable { get; set; }
+        public virtual ICollection<orderTable> orderTable { get; set; }
     }
 }

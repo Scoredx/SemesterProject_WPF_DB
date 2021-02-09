@@ -4,26 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3a809025730c49fea2ddffa726708c7c" Name="Diagram1" ZoomLevel="82">
-        <EntityTypeShape EntityType="Database1Model.addressTable" Width="1.5" PointX="1.125" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Database1Model.category" Width="1.5" PointX="1.125" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Database1Model.customer" Width="1.5" PointX="3.125" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Database1Model.delivery_type" Width="1.5" PointX="5.375" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Database1Model.manufacturer" Width="1.5" PointX="1.125" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="Database1Model.orderTable" Width="1.5" PointX="5.375" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Database1Model.product" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Database1Model.worker" Width="1.5" PointX="7.375" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="Database1Model.FK__customer__custom__2E1BDC42" ManuallyRouted="false" />
-        <AssociationConnector Association="Database1Model.FK__product__product__31EC6D26" ManuallyRouted="false" />
-        <AssociationConnector Association="Database1Model.FK__orderTabl__order__36B12243" ManuallyRouted="false" />
-        <AssociationConnector Association="Database1Model.FK__orderTabl__order__35BCFE0A" ManuallyRouted="false" />
-        <AssociationConnector Association="Database1Model.FK__product__product__30F848ED" ManuallyRouted="false" />
-        <AssociationConnector Association="Database1Model.FK__orderTabl__order__34C8D9D1" ManuallyRouted="true" >
-          <ConnectorPoint PointX="3.7474516112915905" PointY="4.75" />
-          <ConnectorPoint PointX="3.7474516112915905" PointY="3.8768929036458331" />
-          <ConnectorPoint PointX="5.375" PointY="3.8768929036458331" />
-        </AssociationConnector>
-        <AssociationConnector Association="Database1Model.FK__orderTabl__order__37A5467C" ManuallyRouted="false" />
+      <Diagram DiagramId="362ef068921a4954b699b3b60de96966" Name="Diagram1">
+        <EntityTypeShape EntityType="Database1Model.addressTable" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.customer" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.delivery_type" Width="1.5" PointX="7.125" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.orderTable" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.product" Width="1.5" PointX="7.125" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.worker" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <AssociationConnector Association="Database1Model.FK__customer__custom__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK__orderTabl__order__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK__orderTabl__order__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK__orderTabl__order__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK__orderTabl__order__31EC6D26" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
