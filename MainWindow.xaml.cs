@@ -22,7 +22,7 @@ namespace SemesterProject_WPF_DB
     /// </summary>
     public partial class MainWindow : Window
     {
-        Database1Entities1 context = new Database1Entities1();
+        Database1Entities1 db = new Database1Entities1();
         CollectionViewSource custViewSource;
         CollectionViewSource ordViewSource;
         public MainWindow()
@@ -37,8 +37,8 @@ namespace SemesterProject_WPF_DB
         {
 
             System.Windows.Data.CollectionViewSource customerViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("customerViewSource")));
-            context.customer.Load();
-            custViewSource.Source = context.customer.Local;
+            db.customer.Load();
+            custViewSource.Source = db.customer.Local;
            
         }
       
