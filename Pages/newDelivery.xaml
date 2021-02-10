@@ -10,25 +10,40 @@
     <Window.Resources>
         <CollectionViewSource x:Key="productViewSource" d:DesignSource="{d:DesignInstance {x:Type local:product}, CreateList=True}"/>
     </Window.Resources>
-    <Grid DataContext="{StaticResource productViewSource}" >
-        <Button x:Name="button_productReload" Content="Reload" FontSize="11" Margin="489,238,164,86" Click="button_productReload_Click" Width="149" Height="47"/>
-        <Button x:Name="button_productDelete" Content="Delete product" FontSize="11" Margin="643,238,10,86" Click="button_productDelete_Click" Width="149" Height="47"/>
-        <Button x:Name="button_productNewProduct" Content="New Product"  FontSize="11" Margin="489,186,10,138" Click="button_productNewProduct_Click" Width="303" Height="46"/>
-        <Button x:Name="button_productCancel" Content="Close"   FontSize="11" Margin="643,289,10,34" Click="button_productCancel_Click" Width="149" Height="48"/>
+    <Grid DataContext="{StaticResource productViewSource}" Background="#FF2F86AE" >
+        <Button x:Name="button_productReload" Content="Reload" FontSize="11" Click="button_productReload_Click" Margin="649,270,10,58"/>
+        <Button x:Name="button_productDelete" Content="Delete product" FontSize="11"  Click="button_productDelete_Click" Margin="649,222,10,106" RenderTransformOrigin="0.55,-0.278"/>
+        <Button x:Name="button_productNewProduct" Content="New Product"  FontSize="11" Click="button_productNewProduct_Click" Margin="649,174,10,154" RenderTransformOrigin="0.5,0.5" />
+        <Button x:Name="button_productCancel" Content="Close"   FontSize="11" Click="button_productCancel_Click" Margin="649,318,10,10"/>
+        <Button Content="Show Raw Table" HorizontalAlignment="Left" Height="45"  VerticalAlignment="Top" Width="133" Click="button_productShowRawTable" Margin="649,10,0,0" Background="#FFDDDDDD"/>
 
 
-        <DataGrid x:Name="productDataGrid" HorizontalAlignment="Left" Height="162" Margin="10,10,0,0" VerticalAlignment="Top" Width="628" CanUserReorderColumns="True"/>
-        <Label Content="Product Name" HorizontalAlignment="Left" Height="27" Margin="12,229,0,0" VerticalAlignment="Top" Width="89"/>
-        <Label Content="Category" HorizontalAlignment="Left" Height="27" Margin="12,261,0,0" VerticalAlignment="Top" Width="89"/>
-        <Label Content="Manufacturer" HorizontalAlignment="Left" Height="27" Margin="12,197,0,0" VerticalAlignment="Top" Width="89"/>
-        <Label Content="Price" HorizontalAlignment="Left" Height="27" Margin="12,293,0,0" VerticalAlignment="Top" Width="89"/>
-        <Label Content="Cost" HorizontalAlignment="Left" Height="27" Margin="12,325,0,0" VerticalAlignment="Top" Width="89"/>
-        <TextBox x:Name="product_ManufacturerTextBox" HorizontalAlignment="Left" Height="27" Margin="101,197,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="product_NameTextBox" HorizontalAlignment="Left" Height="27" Margin="101,229,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="product_CategoryTextBox" HorizontalAlignment="Left" Height="27" Margin="101,261,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="product_PriceTextBox" HorizontalAlignment="Left" Height="27" Margin="101,293,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="product_CostTextBox" HorizontalAlignment="Left" Height="27" Margin="101,325,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" VerticalContentAlignment="Center"/>
-        <Button Content="Show Raw Table" HorizontalAlignment="Left" Height="47" Margin="489,290,0,0" VerticalAlignment="Top" Width="149" Click="Button_Click"/>
+        <DataGrid x:Name="productDataGrid" HorizontalAlignment="Left" Height="162" Margin="10,10,0,0" VerticalAlignment="Top" Width="628" CanUserReorderColumns="True" SelectionChanged="productGrid_Selection"/>
+        <Label Content="Product Name" HorizontalAlignment="Left" Height="27" Margin="12,229,0,0" VerticalAlignment="Top" Width="105" FontFamily="Consolas" FontSize="14" FontWeight="Bold"/>
+        <Label Content="Category" HorizontalAlignment="Left" Height="27" Margin="12,261,0,0" VerticalAlignment="Top" Width="105" FontFamily="Consolas" FontSize="14" FontWeight="Bold"/>
+        <Label Content="Manufacturer" HorizontalAlignment="Left" Height="27" Margin="12,197,0,0" VerticalAlignment="Top" Width="105" FontFamily="Consolas" FontSize="14" FontWeight="Bold"/>
+        <Label Content="Price" HorizontalAlignment="Left" Height="27" Margin="12,293,0,0" VerticalAlignment="Top" Width="105" FontFamily="Consolas" FontSize="14" FontWeight="Bold"/>
+        <Label Content="Cost" HorizontalAlignment="Left" Height="27" Margin="12,325,0,0" VerticalAlignment="Top" Width="105" FontFamily="Consolas" FontSize="14" FontWeight="Bold"/>
+        
+        <TextBox x:Name="product_ManufacturerTextBox" HorizontalAlignment="Left" Height="27" Margin="122,197,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="product_NameTextBox" HorizontalAlignment="Left" Height="27" Margin="122,229,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="product_CategoryTextBox" HorizontalAlignment="Left" Height="27" Margin="122,261,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="product_PriceTextBox" HorizontalAlignment="Left" Height="27" Margin="122,293,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="product_CostTextBox" HorizontalAlignment="Left" Height="27" Margin="122,325,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" VerticalContentAlignment="Center"/>
+        
+        
+        <Label Content="Product Name" HorizontalAlignment="Left" Height="27" Margin="384,229,0,0" VerticalAlignment="Top" Width="105" FontFamily="Consolas" FontSize="14" FontWeight="Bold"/>
+        <Label Content="Category" HorizontalAlignment="Left" Height="27" Margin="384,261,0,0" VerticalAlignment="Top" Width="105" FontFamily="Consolas" FontSize="14" FontWeight="Bold"/>
+        <Label Content="Manufacturer" HorizontalAlignment="Left" Height="27" Margin="384,197,0,0" VerticalAlignment="Top" Width="105" FontFamily="Consolas" FontSize="14" FontWeight="Bold"/>
+        <Label Content="Price" HorizontalAlignment="Left" Height="27" Margin="384,293,0,0" VerticalAlignment="Top" Width="105" FontFamily="Consolas" FontSize="14" FontWeight="Bold"/>
+        <Label Content="Cost" HorizontalAlignment="Left" Height="27" Margin="384,325,0,0" VerticalAlignment="Top" Width="105" FontFamily="Consolas" FontSize="14" FontWeight="Bold"/>
+
+
+        <TextBox x:Name="product_ManufacturerTextBox2" HorizontalAlignment="Left" Height="27" Margin="494,197,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="144" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="product_NameTextBox2" HorizontalAlignment="Left" Height="27" Margin="494,229,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="144" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="product_CategoryTextBox2" HorizontalAlignment="Left" Height="27" Margin="494,261,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="144" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="product_PriceTextBox2" HorizontalAlignment="Left" Height="27" Margin="494,293,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="144" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="product_CostTextBox2" HorizontalAlignment="Left" Height="27" Margin="494,325,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="144" VerticalContentAlignment="Center"/>
     </Grid>
 </Window>
     
