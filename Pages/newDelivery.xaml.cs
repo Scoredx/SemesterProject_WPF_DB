@@ -29,51 +29,52 @@ namespace SemesterProject_WPF_DB
             //ReloadList();
             this.productDataGrid.ItemsSource = db.product.ToList();
         }
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             AdjustColumnOrder();
         }
-        private void AdjustColumnOrder()
-        {
-            this.productDataGrid.Columns[6].Visibility = Visibility.Collapsed;
-            productDataGrid.Columns[0].DisplayIndex = 0;
-            productDataGrid.Columns[1].DisplayIndex = 2;
-            productDataGrid.Columns[2].DisplayIndex = 1;
-            productDataGrid.Columns[3].DisplayIndex = 1;
-            productDataGrid.Columns[4].DisplayIndex = 4;
-            productDataGrid.Columns[4].Header = "Cost";
-            productDataGrid.Columns[4].Header = "Cost";
-            productDataGrid.Columns[4].Header = "Cost";
-            productDataGrid.Columns[4].Header = "Cost";
-            productDataGrid.Columns[4].Header = "Cost";
-            
-
-        }
-
-        //buttons 
 
         private void button_productNewProduct_Click(object sender, RoutedEventArgs e)
         {
-            product productObject = new product()
+            if (product_NameTextBox.Text != "" && product_CategoryTextBox.Text != "" && product_ManufacturerTextBox.Text != "" && product_PriceTextBox.Text != "" && product_CostTextBox.Text != "")
             {
-                product_name = product_NameTextBox.Text,
-                product_category_name = product_CategoryTextBox.Text,
-                product_manufacturer_name = product_ManufacturerTextBox.Text,
-                product_price = decimal.Parse(product_PriceTextBox.Text),
-                product_cost = decimal.Parse(product_CostTextBox.Text)
-            };
+                decimal priceInt;
+                bool priceResult = decimal.TryParse(product_PriceTextBox.Text, out priceInt);
+                if (!priceResult)
+                {
+                    MessageBox.Show("Price must be number");
+                    return;
+                }
+                decimal costInt;
+                bool costResult = decimal.TryParse(product_PriceTextBox.Text, out costInt);
+                if (!costResult)
+                {
+                    MessageBox.Show("Cost must be number");
+                    return;
+                }
 
-            db.product.Add(productObject);
-            db.SaveChanges();
-            //ReloadList();
+                product productObject = new product()
+                {
+                    product_name = product_NameTextBox.Text,
+                    product_category_name = product_CategoryTextBox.Text,
+                    product_manufacturer_name = product_ManufacturerTextBox.Text,
+                    product_price = priceInt,
+                    product_cost = costInt
+                };
+                db.product.Add(productObject);
+                db.SaveChanges();
+                ReloadList();
+            }
+            else
+            {
+                MessageBox.Show("All fields must be filled");
+            }
+           
         }
 
         private void button_productReload_Click(object sender, RoutedEventArgs e)
         {
-            //ReloadList();
-            AdjustColumnOrder();
-
+            ReloadList();
         }
 
         private void button_productCancel_Click(object sender, RoutedEventArgs e)
@@ -87,20 +88,20 @@ namespace SemesterProject_WPF_DB
             {
                 if (single_row.IsSelected == true)
                 {
-                    product p = (product)this.productDataGrid.SelectedItem;
+                    product p = this.productDataGrid.SelectedItem as product;
                     this.product_ManufacturerTextBox2.Text = p.product_manufacturer_name;
                     this.product_NameTextBox2.Text = p.product_name;
                     this.product_CategoryTextBox2.Text = p.product_category_name;
                     this.product_PriceTextBox2.Text = p.product_price.ToString();
-                    this.product_CostTextBox2.Text = p.product_cost.ToString();
+                    this.product_CostTextBox2.Text = p.product_cost.ToString(); 
                     if (p != null)
                     {
                         db.product.Remove(p);
-                        //ReloadList();
-                        db.SaveChanges();
                     }
                 }
             }
+            db.SaveChanges();
+            ReloadList();
         }
 
         private void productGrid_Selection(object sender, SelectionChangedEventArgs e)
@@ -122,15 +123,6 @@ namespace SemesterProject_WPF_DB
             this.product_PriceTextBox2.Text = p.product_price.ToString();
             this.product_CostTextBox2.Text = p.product_cost.ToString();
         }
-
-
-
-        private void button_productShowRawTable(object sender, RoutedEventArgs e)
-        {
-            this.productDataGrid.ItemsSource = db.product.ToList();
-
-        }
-
         // usable
         public IEnumerable<DataGridRow> GetDataGridRows(DataGrid grid)
         {
@@ -142,21 +134,39 @@ namespace SemesterProject_WPF_DB
                 if (null != row) yield return row;
             }
         }
+        private void AdjustColumnOrder()
+        {
+            this.productDataGrid.Columns[6].Visibility = Visibility.Collapsed;
+            int x = 0;
+            if(x == 0)
+            {
+                productDataGrid.Columns[0].Width = 30;  //index
+                productDataGrid.Columns[1].Width = 90;  //Manufacturer
+                productDataGrid.Columns[2].Width = 120; //model name 
+                productDataGrid.Columns[3].Width = 120; //category
+                productDataGrid.Columns[4].Width = 100; //Price
+                productDataGrid.Columns[5].Width = 100; //Cost
+                x++;
+            }
+            
+            productDataGrid.Columns[0].DisplayIndex = 0; //index
+            productDataGrid.Columns[1].DisplayIndex = 3; //Manufacturer
+            productDataGrid.Columns[2].DisplayIndex = 2; //model name 
+            productDataGrid.Columns[3].DisplayIndex = 1; //category
+            productDataGrid.Columns[4].DisplayIndex = 4; //Price
+            productDataGrid.Columns[0].Header = "ID";
+            productDataGrid.Columns[1].Header = "Manufacturer";
+            productDataGrid.Columns[2].Header = "Model Name";
+            productDataGrid.Columns[3].Header = "Category";
+            productDataGrid.Columns[4].Header = "Price";
+            productDataGrid.Columns[5].Header = "Cost";
+        }
 
-        //private void ReloadList()
-        //{
-        //    var productlist = from x in db.product
-        //                      select new
-        //                      {
-        //                          ProductId = x.product_id,
-        //                          Category = x.product_category_name,
-        //                          Manufacturer = x.product_manufacturer_name,
-        //                          ProductName = x.product_name,
-        //                          Price = x.product_price,
-        //                          Cost = x.product_cost
-        //                      };
-        //    this.productDataGrid.ItemsSource = productlist.ToList();
-        //}
+        private void ReloadList()
+        {
+            this.productDataGrid.ItemsSource = db.product.ToList();
+            AdjustColumnOrder();
 
+        }
     }
 }

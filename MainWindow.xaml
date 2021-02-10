@@ -25,7 +25,7 @@
             <Setter Property="Width" Value="120"/>
         </Style>
     </Window.Resources>
-    <Grid Margin="0,0,0,0" Background="#FF2F86AE">
+    <Grid Margin="0,0,0,0" Background="#FF66BCF4">
         <Grid.RowDefinitions>
             <RowDefinition Height="567"/>
         </Grid.RowDefinitions>
