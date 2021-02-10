@@ -12,24 +12,48 @@
         <CollectionViewSource x:Key="productViewSource" d:DesignSource="{d:DesignInstance {x:Type local:product}, CreateList=True}"/>
     </Window.Resources>
     <Grid DataContext="{StaticResource productViewSource}" Background="#FF66BCF4" >
-        <Button x:Name="button_productReload" Content="Reload" FontSize="11" Click="button_productReload_Click" Margin="649,270,10,58"/>
-        <Button x:Name="button_productDelete" Content="Delete product" FontSize="11"  Click="button_productDelete_Click" Margin="649,222,10,106" RenderTransformOrigin="0.55,-0.278"/>
-        <Button x:Name="button_productNewProduct" Content="New Product"  FontSize="11" Click="button_productNewProduct_Click" Margin="649,174,10,154" RenderTransformOrigin="0.5,0.5" />
-        <Button x:Name="button_productCancel" Content="Close"   FontSize="11" Click="button_productCancel_Click" Margin="649,318,10,10"/>
+        <Button x:Name="button_productReload" Content="Reload" FontSize="14" Click="button_productReload_Click" Margin="649,270,10,58" Background="White" FontFamily="Consolas" FontWeight="Bold">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="button_productDelete" Content="Delete product" FontSize="14"  Click="button_productDelete_Click" Margin="649,222,10,106" RenderTransformOrigin="0.55,-0.278" Background="White" FontFamily="Consolas" FontWeight="Bold">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="button_productNewProduct" Content="New Product"  FontSize="14" Click="button_productNewProduct_Click" Margin="649,174,10,154" RenderTransformOrigin="0.5,0.5" Background="White" FontFamily="Consolas" FontWeight="Bold" >
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="button_productCancel" Content="Close"   FontSize="14" Click="button_productCancel_Click" Margin="649,318,10,10" Background="White" FontFamily="Consolas" FontWeight="Bold">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
 
 
-        <DataGrid x:Name="productDataGrid" HorizontalAlignment="Left" Height="164" Margin="10,10,0,0" VerticalAlignment="Top" Width="623" SelectionChanged="productGrid_Selection" CanUserResizeColumns="False" MinColumnWidth="17"/>
+        <DataGrid x:Name="productDataGrid" HorizontalAlignment="Left" Height="164" Margin="10,10,0,0" VerticalAlignment="Top" Width="623" SelectionChanged="productGrid_Selection" CanUserResizeColumns="False" MinColumnWidth="17" IsReadOnly="true"/>
         <Label Content="Product Name" HorizontalAlignment="Left" Height="27" Margin="120,229,0,0" VerticalAlignment="Top" Width="105" FontFamily="Consolas" FontSize="14" FontWeight="Bold"/>
         <Label Content="Category" HorizontalAlignment="Left" Height="27" Margin="120,261,0,0" VerticalAlignment="Top" Width="105" FontFamily="Consolas" FontSize="14" FontWeight="Bold"/>
         <Label Content="Manufacturer" HorizontalAlignment="Left" Height="27" Margin="120,197,0,0" VerticalAlignment="Top" Width="105" FontFamily="Consolas" FontSize="14" FontWeight="Bold"/>
         <Label Content="Price" HorizontalAlignment="Left" Height="27" Margin="120,293,0,0" VerticalAlignment="Top" Width="105" FontFamily="Consolas" FontSize="14" FontWeight="Bold"/>
         <Label Content="Cost" HorizontalAlignment="Left" Height="27" Margin="120,325,0,0" VerticalAlignment="Top" Width="105" FontFamily="Consolas" FontSize="14" FontWeight="Bold"/>
 
-        <TextBox x:Name="product_ManufacturerTextBox" HorizontalAlignment="Left" Height="27" Margin="230,197,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="product_NameTextBox" HorizontalAlignment="Left" Height="27" Margin="230,229,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="product_CategoryTextBox" HorizontalAlignment="Left" Height="27" Margin="230,261,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="product_PriceTextBox" HorizontalAlignment="Left" Height="27" Margin="230,293,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="product_CostTextBox" HorizontalAlignment="Left" Height="27" Margin="230,325,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="product_ManufacturerTextBox" HorizontalAlignment="Left" Height="27" Margin="230,197,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" VerticalContentAlignment="Center" FontFamily="Consolas"/>
+        <TextBox x:Name="product_NameTextBox" HorizontalAlignment="Left" Height="27" Margin="230,229,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" VerticalContentAlignment="Center" FontFamily="Consolas"/>
+        <TextBox x:Name="product_CategoryTextBox" HorizontalAlignment="Left" Height="27" Margin="230,261,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" VerticalContentAlignment="Center" FontFamily="Consolas"/>
+        <TextBox x:Name="product_PriceTextBox" HorizontalAlignment="Left" Height="27" Margin="230,293,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" VerticalContentAlignment="Center" FontFamily="Consolas"/>
+        <TextBox x:Name="product_CostTextBox" HorizontalAlignment="Left" Height="27" Margin="230,325,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" VerticalContentAlignment="Center" FontFamily="Consolas"/>
 
 
         <Label Content="Product Name" HorizontalAlignment="Left" Height="27" Margin="384,229,0,0" VerticalAlignment="Top" Width="105" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Visibility="Collapsed"/>

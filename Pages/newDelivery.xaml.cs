@@ -93,7 +93,7 @@ namespace SemesterProject_WPF_DB
                     this.product_NameTextBox2.Text = p.product_name;
                     this.product_CategoryTextBox2.Text = p.product_category_name;
                     this.product_PriceTextBox2.Text = p.product_price.ToString();
-                    this.product_CostTextBox2.Text = p.product_cost.ToString(); 
+                    this.product_CostTextBox2.Text = p.product_cost.ToString();
                     if (p != null)
                     {
                         db.product.Remove(p);
