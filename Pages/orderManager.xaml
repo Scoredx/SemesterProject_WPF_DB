@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="orderManager" Height="450" Width="800">
     <Grid Background="#FF66BCF4">
-        <DataGrid x:Name="orderDataGrid" HorizontalAlignment="Left" Height="249" Margin="20,10,0,0" VerticalAlignment="Top" Width="762" SelectionChanged="productGrid_Selection" CanUserResizeColumns="False" MinColumnWidth="17" IsReadOnly="true"/>
+        <DataGrid x:Name="orderDataGrid" HorizontalAlignment="Left" Height="249" Margin="10,10,0,0" VerticalAlignment="Top" Width="762" SelectionChanged="productGrid_Selection" CanUserResizeColumns="False" MinColumnWidth="17" IsReadOnly="true"/>
+        <Button Content="Button" HorizontalAlignment="Left" Height="76" Margin="146,295,0,0" VerticalAlignment="Top" Width="111" Click="Button_Click"/>
     </Grid>
 </Window>

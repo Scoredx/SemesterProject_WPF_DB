@@ -42,7 +42,6 @@ namespace SemesterProject_WPF_DB
 
                 product productObj = prdct.SingleOrDefault();
 
-
                 decimal priceInt;
                 bool priceResult = decimal.TryParse(product_PriceTextBox2.Text, out priceInt);
                 if (!priceResult)
@@ -77,23 +76,17 @@ namespace SemesterProject_WPF_DB
         }
         private void button_productDelete_Click(object sender, RoutedEventArgs e)
         {
-            var row_list = GetDataGridRows(productDataGrid);
-            foreach (DataGridRow single_row in row_list)
+            product p = this.productDataGrid.SelectedItem as product;
+            if (p != null)
             {
-                if (single_row.IsSelected == true)
-                {
-                    product p = this.productDataGrid.SelectedItem as product;
-                    this.product_ManufacturerTextBox2.Text = p.product_manufacturer_name;
-                    this.product_NameTextBox2.Text = p.product_name;
-                    this.product_CategoryTextBox2.Text = p.product_category_name;
-                    this.product_PriceTextBox2.Text = p.product_price.ToString();
-                    this.product_CostTextBox2.Text = p.product_cost.ToString();
-                    if (p != null)
-                    {
-                        db.product.Remove(p);
-                    }
-                }
+                this.product_ManufacturerTextBox2.Text = p.product_manufacturer_name;
+                this.product_NameTextBox2.Text = p.product_name;
+                this.product_CategoryTextBox2.Text = p.product_category_name;
+                this.product_PriceTextBox2.Text = p.product_price.ToString();
+                this.product_CostTextBox2.Text = p.product_cost.ToString();
+                db.product.Remove(p);
             }
+
             db.SaveChanges();
             ReloadList();
         }
@@ -119,7 +112,6 @@ namespace SemesterProject_WPF_DB
                 productDataGrid.Columns[5].Width = 100; //Cost
                 x++;
             }
-
             productDataGrid.Columns[0].DisplayIndex = 0; //index
             productDataGrid.Columns[1].DisplayIndex = 3; //Manufacturer
             productDataGrid.Columns[2].DisplayIndex = 2; //model name 
@@ -152,17 +144,6 @@ namespace SemesterProject_WPF_DB
             this.product_PriceTextBox2.Text = p.product_price.ToString();
             this.product_CostTextBox2.Text = p.product_cost.ToString();
             this.productID = p.product_id;
-        }
-        // usable
-        public IEnumerable<DataGridRow> GetDataGridRows(DataGrid grid)
-        {
-            var itemsSource = grid.ItemsSource as IEnumerable;
-            if (null == itemsSource) yield return null;
-            foreach (var item in itemsSource)
-            {
-                var row = grid.ItemContainerGenerator.ContainerFromItem(item) as DataGridRow;
-                if (null != row) yield return row;
-            }
         }
         private void ReloadList()
         {

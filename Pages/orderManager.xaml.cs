@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,48 +22,42 @@ namespace SemesterProject_WPF_DB
     {
         Database1Entities1 db = new Database1Entities1();
 
+        /// <summary>
+        /// Initialize data from db with foregin keys
+        /// </summary>
         public orderManager()
         {
             InitializeComponent();
-            //this.orderDataGrid.ItemsSource = db.orderTable.ToList();
 
+            var orders = db.orderTable
+                .Include(x => x.product)
+                .Include(x => x.customer)
+                .Include(x => x.worker)
+                .Include(x => x.delivery_type)
+                .ToList();
 
-
-            //var data = (from order in db.orderTable.ToList()
-            //            join product in db.product
-            //            on order.order_product_id equals product.product_id
-            //            select new
-            //            {
-            //                ProductID = product.product_id
-            //            }).ToList();
-
-            //orderDataGrid.DataSource = data;
-
-
-            var data = (from order in db.orderTable.ToList()
-                        join product in db.product
-                        on order.order_id equals product.product_id
-                        join customer in db.customer
-                        on order.order_id equals customer.customer_id
-                        join worker in db.worker
-                        on order.order_id equals worker.worker_id
-                        join delivery in db.delivery_type
-                        on order.order_delivery_type_id equals delivery.delivery_type_id
-                        select new
-                        {
-                            OrderID = order.order_id,
-                            Product = product.product_name,
-                            Customer = customer.customer_name,
-                            Worker = worker.worker_id,
-                            DeliveryType = delivery.delivery_type1,
-                            OrderDate = order.order_date
-                        }).ToList();
-
-
-            this.orderDataGrid.ItemsSource = data;
+            List<dynamic> displayItems = new List<dynamic>();
+            foreach (var order in orders)
+            {
+                displayItems.Add(new
+                {
+                    OrderID = order.order_id,
+                    Product = order.product.product_name,
+                    Customer = order.customer.customer_name,
+                    Worker = order.worker.worker_id,
+                    DeliveryType = order.delivery_type.delivery_type1,
+                    OrderDate = order.order_date
+                });
+            }
+            this.orderDataGrid.ItemsSource = displayItems;
         }
 
         private void productGrid_Selection(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
 
         }
