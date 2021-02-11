@@ -242,6 +242,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Pages\warehouse.png" />
     <Resource Include="Pages\van.gif" />
     <Resource Include="van.gif" />
   </ItemGroup>

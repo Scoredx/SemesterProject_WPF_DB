@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:SemesterProject_WPF_DB"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="TSM: New Delivery" Height="400" Width="807.692" Icon="../logo.ico" Loaded="Window_Loaded">
+        Title="TSM: New Delivery" 
+        Height="400" Width="807.692" 
+        Icon="../logo.ico" 
+Loaded="Window_Loaded">
 
     <Window.Resources>
         <CollectionViewSource x:Key="productViewSource" d:DesignSource="{d:DesignInstance {x:Type local:product}, CreateList=True}"/>
@@ -33,7 +36,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="button_productCancel" Content="Close"   FontSize="14" Click="button_productCancel_Click" Margin="649,318,10,10" Background="White" FontFamily="Consolas" FontWeight="Bold">
+        <Button x:Name="button_closeWindow" Content="Close"   FontSize="14" Click="button_closeWindow_Click" Margin="649,318,10,10" Background="White" FontFamily="Consolas" FontWeight="Bold">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

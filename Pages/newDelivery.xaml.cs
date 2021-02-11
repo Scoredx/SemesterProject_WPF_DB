@@ -77,7 +77,7 @@ namespace SemesterProject_WPF_DB
             ReloadList();
         }
 
-        private void button_productCancel_Click(object sender, RoutedEventArgs e)
+        private void button_closeWindow_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
@@ -166,7 +166,6 @@ namespace SemesterProject_WPF_DB
         {
             this.productDataGrid.ItemsSource = db.product.ToList();
             AdjustColumnOrder();
-
         }
     }
 }
