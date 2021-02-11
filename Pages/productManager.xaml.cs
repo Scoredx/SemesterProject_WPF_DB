@@ -52,7 +52,7 @@ namespace SemesterProject_WPF_DB
                 }
 
                 decimal costInt;
-                bool costResult = decimal.TryParse(product_PriceTextBox2.Text, out costInt);
+                bool costResult = decimal.TryParse(product_CostTextBox2.Text, out costInt);
                 if (!costResult)
                 {
                     MessageBox.Show("Cost must be number");
@@ -101,8 +101,6 @@ namespace SemesterProject_WPF_DB
         {
             ReloadList();
         }
-
-
         private void button_closeWindow_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -146,7 +144,6 @@ namespace SemesterProject_WPF_DB
                 this.product_CategoryTextBox2.Text = string.Empty;
                 this.product_PriceTextBox2.Text = string.Empty.ToString();
                 this.product_CostTextBox2.Text = string.Empty.ToString();
-
                 return;
             }
             this.product_ManufacturerTextBox2.Text = p.product_manufacturer_name;
