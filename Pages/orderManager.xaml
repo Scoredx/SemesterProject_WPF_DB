@@ -5,9 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SemesterProject_WPF_DB"
         mc:Ignorable="d"
-        Title="orderManager" Height="450" Width="800">
+        Title="orderManager" Height="500" Width="850">
     <Grid Background="#FF66BCF4">
-        <DataGrid x:Name="orderDataGrid" HorizontalAlignment="Left" Height="249" Margin="10,10,0,0" VerticalAlignment="Top" Width="762" SelectionChanged="productGrid_Selection" CanUserResizeColumns="False" MinColumnWidth="17" IsReadOnly="true"/>
-        <Button Content="Button" HorizontalAlignment="Left" Height="76" Margin="146,295,0,0" VerticalAlignment="Top" Width="111" Click="Button_Click"/>
+        <DataGrid x:Name="orderDataGrid" HorizontalAlignment="Left" Height="449" Margin="10,10,0,0" VerticalAlignment="Top" Width="483"  CanUserResizeColumns="False" MinColumnWidth="17" IsReadOnly="true"/>
+
+        <Button Content="Button" HorizontalAlignment="Left" Height="76" Margin="511,383,0,0" VerticalAlignment="Top" Width="111" Click="button_productNewProduct_Click"/>
+
+        <Label Content="Product" HorizontalAlignment="Left" Height="27" Margin="511,13,0,0" VerticalAlignment="Top" Width="105" FontFamily="Consolas" FontSize="14" FontWeight="Bold" />
+        <Label Content="Customer" HorizontalAlignment="Left" Height="27" Margin="511,67,0,0" VerticalAlignment="Top" Width="105" FontFamily="Consolas" FontSize="14" FontWeight="Bold" />
+        <Label Content="Worker" HorizontalAlignment="Left" Height="27" Margin="511,122,0,0" VerticalAlignment="Top" Width="105" FontFamily="Consolas" FontSize="14" FontWeight="Bold" />
+        <Label Content="Delivery Type" HorizontalAlignment="Left" Height="27" Margin="512,175,0,0" VerticalAlignment="Top" Width="116" FontFamily="Consolas" FontSize="14" FontWeight="Bold" />
+
+
+
+        <TextBox x:Name="productIndex" HorizontalAlignment="Left" Height="27" Margin="511,40,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50" VerticalContentAlignment="Center" />
+        <TextBox x:Name="customerIndex" HorizontalAlignment="Left" Height="27" Margin="511,94,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50" VerticalContentAlignment="Center" />
+        <TextBox x:Name="workerIndex" HorizontalAlignment="Left" Height="27" Margin="511,149,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50" VerticalContentAlignment="Center" />
+        <TextBox x:Name="deliveryIndex" HorizontalAlignment="Left" Height="27" Margin="511,202,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50" VerticalContentAlignment="Center" />
+        <TextBox x:Name="dateTextBox" HorizontalAlignment="Left" Height="27" Margin="511,261,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50" VerticalContentAlignment="Center" />
+        <Label Content="Order Date" HorizontalAlignment="Left" Height="27" Margin="512,234,0,0" VerticalAlignment="Top" Width="116" FontFamily="Consolas" FontSize="14" FontWeight="Bold" />
+
     </Grid>
 </Window>

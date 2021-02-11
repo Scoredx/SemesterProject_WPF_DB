@@ -26,14 +26,12 @@ namespace SemesterProject_WPF_DB
         public newDelivery()
         {
             InitializeComponent();
-            //ReloadList();
             this.productDataGrid.ItemsSource = db.product.ToList();
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             AdjustColumnOrder();
         }
-
         private void button_productNewProduct_Click(object sender, RoutedEventArgs e)
         {
             if (product_NameTextBox.Text != "" && product_CategoryTextBox.Text != "" && product_ManufacturerTextBox.Text != "" && product_PriceTextBox.Text != "" && product_CostTextBox.Text != "")
@@ -52,7 +50,7 @@ namespace SemesterProject_WPF_DB
                     MessageBox.Show("Cost must be number");
                     return;
                 }
-
+                
                 product productObject = new product()
                 {
                     product_name = product_NameTextBox.Text,
@@ -69,7 +67,7 @@ namespace SemesterProject_WPF_DB
             {
                 MessageBox.Show("All fields must be filled");
             }
-           
+
         }
 
         private void button_productReload_Click(object sender, RoutedEventArgs e)
@@ -83,22 +81,16 @@ namespace SemesterProject_WPF_DB
         }
         private void button_productDelete_Click(object sender, RoutedEventArgs e)
         {
-            var row_list = GetDataGridRows(productDataGrid);
-            foreach (DataGridRow single_row in row_list)
+
+            product p = this.productDataGrid.SelectedItem as product;
+            if (p != null)
             {
-                if (single_row.IsSelected == true)
-                {
-                    product p = this.productDataGrid.SelectedItem as product;
-                    this.product_ManufacturerTextBox2.Text = p.product_manufacturer_name;
-                    this.product_NameTextBox2.Text = p.product_name;
-                    this.product_CategoryTextBox2.Text = p.product_category_name;
-                    this.product_PriceTextBox2.Text = p.product_price.ToString();
-                    this.product_CostTextBox2.Text = p.product_cost.ToString();
-                    if (p != null)
-                    {
-                        db.product.Remove(p);
-                    }
-                }
+                this.product_ManufacturerTextBox2.Text = p.product_manufacturer_name;
+                this.product_NameTextBox2.Text = p.product_name;
+                this.product_CategoryTextBox2.Text = p.product_category_name;
+                this.product_PriceTextBox2.Text = p.product_price.ToString();
+                this.product_CostTextBox2.Text = p.product_cost.ToString();
+                db.product.Remove(p);
             }
             db.SaveChanges();
             ReloadList();
@@ -122,17 +114,6 @@ namespace SemesterProject_WPF_DB
             this.product_CategoryTextBox2.Text = p.product_category_name;
             this.product_PriceTextBox2.Text = p.product_price.ToString();
             this.product_CostTextBox2.Text = p.product_cost.ToString();
-        }
-        // usable
-        public IEnumerable<DataGridRow> GetDataGridRows(DataGrid grid)
-        {
-            var itemsSource = grid.ItemsSource as IEnumerable;
-            if (null == itemsSource) yield return null;
-            foreach (var item in itemsSource)
-            {
-                var row = grid.ItemContainerGenerator.ContainerFromItem(item) as DataGridRow;
-                if (null != row) yield return row;
-            }
         }
         private void AdjustColumnOrder()
         {

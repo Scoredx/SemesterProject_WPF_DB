@@ -86,7 +86,6 @@ namespace SemesterProject_WPF_DB
                 this.product_CostTextBox2.Text = p.product_cost.ToString();
                 db.product.Remove(p);
             }
-
             db.SaveChanges();
             ReloadList();
         }
