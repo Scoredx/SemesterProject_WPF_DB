@@ -37,19 +37,34 @@ namespace SemesterProject_WPF_DB
             //            }).ToList();
 
             //orderDataGrid.DataSource = data;
-            var tarifas = (from t in db.orderTable.Include("product")
-                           select t);
 
-            this.orderDataGrid.ItemsSource = tarifas.ToList();
 
+            var data = (from order in db.orderTable.ToList()
+                        join product in db.product
+                        on order.order_id equals product.product_id
+                        join customer in db.customer
+                        on order.order_id equals customer.customer_id
+                        join worker in db.worker
+                        on order.order_id equals worker.worker_id
+                        join delivery in db.delivery_type
+                        on order.order_delivery_type_id equals delivery.delivery_type_id
+                        select new
+                        {
+                            OrderID = order.order_id,
+                            Product = product.product_name,
+                            Customer = customer.customer_name,
+                            Worker = worker.worker_id,
+                            DeliveryType = delivery.delivery_type1,
+                            OrderDate = order.order_date
+                        }).ToList();
+
+
+            this.orderDataGrid.ItemsSource = data;
         }
 
         private void productGrid_Selection(object sender, SelectionChangedEventArgs e)
         {
+
         }
-
-
-
-        
     }
 }
