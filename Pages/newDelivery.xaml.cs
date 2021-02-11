@@ -38,15 +38,15 @@ namespace SemesterProject_WPF_DB
         {
             if (product_NameTextBox.Text != "" && product_CategoryTextBox.Text != "" && product_ManufacturerTextBox.Text != "" && product_PriceTextBox.Text != "" && product_CostTextBox.Text != "")
             {
-                decimal priceInt;
-                bool priceResult = decimal.TryParse(product_PriceTextBox.Text, out priceInt);
+                decimal priceDecimal;
+                bool priceResult = decimal.TryParse(product_PriceTextBox.Text, out priceDecimal);
                 if (!priceResult)
                 {
                     MessageBox.Show("Price must be number");
                     return;
                 }
-                decimal costInt;
-                bool costResult = decimal.TryParse(product_PriceTextBox.Text, out costInt);
+                decimal costDecimal;
+                bool costResult = decimal.TryParse(product_CostTextBox.Text, out costDecimal);
                 if (!costResult)
                 {
                     MessageBox.Show("Cost must be number");
@@ -58,8 +58,8 @@ namespace SemesterProject_WPF_DB
                     product_name = product_NameTextBox.Text,
                     product_category_name = product_CategoryTextBox.Text,
                     product_manufacturer_name = product_ManufacturerTextBox.Text,
-                    product_price = priceInt,
-                    product_cost = costInt
+                    product_price = priceDecimal,
+                    product_cost = costDecimal
                 };
                 db.product.Add(productObject);
                 db.SaveChanges();

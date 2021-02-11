@@ -19,9 +19,37 @@ namespace SemesterProject_WPF_DB
     /// </summary>
     public partial class orderManager : Window
     {
+        Database1Entities1 db = new Database1Entities1();
+
         public orderManager()
         {
             InitializeComponent();
+            //this.orderDataGrid.ItemsSource = db.orderTable.ToList();
+
+
+
+            //var data = (from order in db.orderTable.ToList()
+            //            join product in db.product
+            //            on order.order_product_id equals product.product_id
+            //            select new
+            //            {
+            //                ProductID = product.product_id
+            //            }).ToList();
+
+            //orderDataGrid.DataSource = data;
+            var tarifas = (from t in db.orderTable.Include("product")
+                           select t);
+
+            this.orderDataGrid.ItemsSource = tarifas.ToList();
+
         }
+
+        private void productGrid_Selection(object sender, SelectionChangedEventArgs e)
+        {
+        }
+
+
+
+        
     }
 }

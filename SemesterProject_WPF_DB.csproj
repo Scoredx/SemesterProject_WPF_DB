@@ -109,9 +109,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\deleteRecordWindow.xaml.cs">
-      <DependentUpon>deleteRecordWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\newDelivery.xaml.cs">
       <DependentUpon>newDelivery.xaml</DependentUpon>
     </Compile>
@@ -149,10 +146,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\deleteRecordWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\newDelivery.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

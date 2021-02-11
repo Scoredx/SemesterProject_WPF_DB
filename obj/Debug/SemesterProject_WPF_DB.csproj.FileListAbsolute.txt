@@ -9,7 +9,6 @@ E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\bin\Debug\EntityFramework.xml
 E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\bin\Debug\EntityFramework.SqlServer.xml
 E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\obj\Debug\Pages\customerManager.g.cs
 E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\obj\Debug\MainWindow.g.cs
-E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\obj\Debug\Pages\deleteRecordWindow.g.cs
 E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\obj\Debug\Pages\newDelivery.g.cs
 E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\obj\Debug\Pages\orderManager.g.cs
 E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\obj\Debug\Pages\productManager.g.cs
@@ -20,7 +19,6 @@ E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\obj\Debug\SemesterProject_WPF_DB
 E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\obj\Debug\SemesterProject_WPF_DB_MarkupCompile.lref
 E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\obj\Debug\Pages\customerManager.baml
 E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\obj\Debug\MainWindow.baml
-E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\obj\Debug\Pages\deleteRecordWindow.baml
 E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\obj\Debug\Pages\newDelivery.baml
 E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\obj\Debug\Pages\orderManager.baml
 E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\obj\Debug\Pages\productManager.baml

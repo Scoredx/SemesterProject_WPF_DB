@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SemesterProject_WPF_DB"
         mc:Ignorable="d"
         Title="orderManager" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Background="#FF66BCF4">
+        <DataGrid x:Name="orderDataGrid" HorizontalAlignment="Left" Height="249" Margin="20,10,0,0" VerticalAlignment="Top" Width="762" SelectionChanged="productGrid_Selection" CanUserResizeColumns="False" MinColumnWidth="17" IsReadOnly="true"/>
     </Grid>
 </Window>
