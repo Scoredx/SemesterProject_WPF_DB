@@ -88,9 +88,6 @@
     <Compile Include="customer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Pages\customerManager.xaml.cs">
-      <DependentUpon>customerManager.xaml</DependentUpon>
-    </Compile>
     <Compile Include="delivery_type.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -109,23 +106,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="orderTable.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\customerManager.xaml.cs">
+      <DependentUpon>customerManager.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\newDelivery.xaml.cs">
       <DependentUpon>newDelivery.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\orderManager.xaml.cs">
       <DependentUpon>orderManager.xaml</DependentUpon>
     </Compile>
-    <Compile Include="orderTable.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="product.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Pages\productManager.xaml.cs">
       <DependentUpon>productManager.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\staffManager.xaml.cs">
       <DependentUpon>staffManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="product.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="worker.cs">
       <DependentUpon>Model1.tt</DependentUpon>

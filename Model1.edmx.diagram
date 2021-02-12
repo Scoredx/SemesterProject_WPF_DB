@@ -4,13 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="362ef068921a4954b699b3b60de96966" Name="Diagram1">
-        <EntityTypeShape EntityType="Database1Model.addressTable" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Database1Model.customer" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Database1Model.delivery_type" Width="1.5" PointX="7.125" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="c49a362af02f45968093bf4c649c06ba" Name="Diagram1">
+        <EntityTypeShape EntityType="Database1Model.addressTable" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.customer" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.delivery_type" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Database1Model.orderTable" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Database1Model.product" Width="1.5" PointX="7.125" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Database1Model.worker" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.product" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.worker" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
         <AssociationConnector Association="Database1Model.FK__customer__custom__2A4B4B5E" ManuallyRouted="false" />
         <AssociationConnector Association="Database1Model.FK__orderTabl__order__30F848ED" ManuallyRouted="false" />
         <AssociationConnector Association="Database1Model.FK__orderTabl__order__300424B4" ManuallyRouted="false" />

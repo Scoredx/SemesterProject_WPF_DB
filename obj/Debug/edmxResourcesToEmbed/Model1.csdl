@@ -43,7 +43,6 @@
     <Property Name="order_delivery_type_id" Type="Int32" Nullable="false" />
     <Property Name="order_customer_id" Type="Int32" Nullable="false" />
     <Property Name="order_worker_id" Type="Int32" Nullable="false" />
-    <Property Name="order_date" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="customer" Relationship="Self.FK__orderTabl__order__30F848ED" FromRole="orderTable" ToRole="customer" />
     <NavigationProperty Name="delivery_type" Relationship="Self.FK__orderTabl__order__300424B4" FromRole="orderTable" ToRole="delivery_type" />
     <NavigationProperty Name="product" Relationship="Self.FK__orderTabl__order__2F10007B" FromRole="orderTable" ToRole="product" />

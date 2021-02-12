@@ -22,26 +22,15 @@ namespace SemesterProject_WPF_DB
     /// </summary>
     public partial class MainWindow : Window
     {
-        Database1Entities1 db = new Database1Entities1();
-        CollectionViewSource custViewSource;
-        CollectionViewSource ordViewSource;
         public MainWindow()
         {
             InitializeComponent();
-            custViewSource = ((CollectionViewSource)(FindResource("customerViewSource")));
-            ordViewSource = ((CollectionViewSource)(FindResource("customerorderTableViewSource")));
 
             DataContext = this;
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
-            System.Windows.Data.CollectionViewSource customerViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("customerViewSource")));
-            db.customer.Load();
-            custViewSource.Source = db.customer.Local;
-           
         }
-      
         private void newDelivery_button(object sender, RoutedEventArgs e)
         {
             newDelivery newDelivery = new newDelivery();

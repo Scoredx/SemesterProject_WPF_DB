@@ -29,20 +29,76 @@ namespace SemesterProject_WPF_DB
         {
             InitializeComponent();
             ReloadList();
+        }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            filterByProduct.Visibility = Visibility.Collapsed;
+            filterByDelivery.Visibility = Visibility.Collapsed;
+            filterByWorker.Visibility = Visibility.Collapsed;
+            filterByCustomer.Visibility = Visibility.Collapsed;
 
-
+            filterByProductID_TB.Visibility = Visibility.Collapsed;
+            filterByCustomerID_TB.Visibility = Visibility.Collapsed;
+            filterByWorkerID_TB.Visibility = Visibility.Collapsed;
+            filterByDeliveryID_TB.Visibility = Visibility.Collapsed;
         }
 
-        private void button_productNewProduct_Click(object sender, RoutedEventArgs e)
-        {
+        private void button_productNewProduct_Click(object sender, RoutedEventArgs e) /////////////////////// create New Product
+        { 
             if (productIndex.Text != "" && customerIndex.Text != "" && workerIndex.Text != "" && deliveryIndex.Text != "")
             {
+                int productID = checkProductQan(productIndex.Text);
+                if(productID == -1)
+                {
+                    MessageBox.Show($"There is no such Product.");
+                    return;
+                }else if(productID == 0)
+                {
+                    MessageBox.Show("Product Index must be number");
+                    return;
+                }
+
+                int customerID = checkCustomerQan(customerIndex.Text);
+                if (customerID == -1)
+                {
+                    MessageBox.Show($"There is no such Customer.");
+                    return;
+                }
+                else if (customerID == 0)
+                {
+                    MessageBox.Show("Customer Index must be number");
+                    return;
+                }
+
+                int workerID = checkWorkerQan(workerIndex.Text);
+                if (workerID == -1)
+                {
+                    MessageBox.Show($"There is no such Customer.");
+                    return;
+                }
+                else if (workerID == 0)
+                {
+                    MessageBox.Show("Customer Index must be number");
+                    return;
+                }
+
+                int deliveryID = checkDeliveryTypeQan(deliveryIndex.Text);
+                if (deliveryID == -1)
+                {
+                    MessageBox.Show($"There is no such Customer.");
+                    return;
+                }
+                else if (deliveryID == 0)
+                {
+                    MessageBox.Show("Customer Index must be number");
+                    return;
+                }
                 orderTable productObject = new orderTable()
                 {
-                    order_product_id = int.Parse(productIndex.Text),
-                    order_customer_id = int.Parse(customerIndex.Text),
-                    order_worker_id = int.Parse(workerIndex.Text),
-                    order_delivery_type_id = int.Parse(deliveryIndex.Text),
+                    order_product_id = productID,
+                    order_customer_id = customerID,
+                    order_worker_id = workerID,
+                    order_delivery_type_id = deliveryID
                 };
                 db.orderTable.Add(productObject);
                 db.SaveChanges();
@@ -50,12 +106,273 @@ namespace SemesterProject_WPF_DB
             }
             else
             {
-                MessageBox.Show("All fields must be filled");
+                MessageBox.Show("There is an empty field");
+            }
+        }
+
+        private int checkProductQan(string field) /////////////////////// check Product Qantity
+        {
+            IQueryable<product> count1 = db.product;
+            var productsQuantity = count1.Count();
+
+            int productIndexInt;
+            bool productIntResult = int.TryParse(field, out productIndexInt);
+            if (productIntResult)
+            {
+                if (productsQuantity >= productIndexInt)
+                {
+                    return productIndexInt;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            else
+            {
+                return 0;
+            }
+
+        } 
+
+        private int checkCustomerQan(string field) /////////////////////// check Product Qantity 
+        {
+            IQueryable<product> count1 = db.product;
+            var productsQuantity = count1.Count();
+
+            int customerIndexInt;
+            bool customertIntResult = int.TryParse(field, out customerIndexInt);
+            if (customertIntResult)
+            {
+                if (productsQuantity >= customerIndexInt)
+                {
+                    return customerIndexInt;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            else
+            {
+                return 0;
             }
 
         }
 
-        private void ReloadList()
+        private int checkWorkerQan(string field) /////////////////////// check Worker Qantity
+        {
+            IQueryable<product> count1 = db.product;
+            var productsQuantity = count1.Count();
+
+            int workerIndexResult;
+            bool workerIntResult = int.TryParse(field, out workerIndexResult);
+            if (workerIntResult)
+            {
+                if (productsQuantity >= workerIndexResult)
+                {
+                    return workerIndexResult;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            else
+            {
+                return 0;
+            }
+
+        }
+
+        private int checkDeliveryTypeQan(string field) /////////////////////// check DeliveryType Qantity
+        {
+            IQueryable<product> count1 = db.product;
+            var productsQuantity = count1.Count();
+
+            int deliveryIndexInt;
+            bool deliveryIntResult = int.TryParse(field, out deliveryIndexInt);
+            if (deliveryIntResult)
+            {
+                if (productsQuantity >= deliveryIndexInt)
+                {
+                    return deliveryIndexInt;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            else
+            {
+                return 0;
+            }
+
+        }
+
+
+        private void SelectByProductID(object sender, RoutedEventArgs e) /////////////////////// select by product id 
+        {
+            int productID = checkProductQan(filterByProductID_TB.Text);
+            if (productID == -1)
+            {
+                MessageBox.Show($"There is no such Product.");
+                return;
+            }
+            else if (productID == 0)
+            {
+                MessageBox.Show("Product Index must be number");
+                return;
+            }
+
+            var orders = db.orderTable
+              .Where(st => st.product.product_id == productID)
+              .Include(x => x.product)
+              .Include(x => x.customer)
+              .Include(x => x.worker)
+              .Include(x => x.delivery_type)
+              .ToList();
+
+            List<dynamic> displayItems = new List<dynamic>();
+            foreach (var order in orders)
+            {
+                displayItems.Add(new
+                {
+                    order.order_id,
+                    order.product.product_id,
+                    order.product.product_name,
+                    order.customer.customer_id,
+                    order.customer.customer_name,
+                    order.customer.customer_surename,
+                    order.worker.worker_id,
+                    order.order_delivery_type_id,
+                    order.delivery_type.delivery_type1
+                });
+            }
+            this.orderDataGrid.ItemsSource = displayItems;
+        }
+        private void SelectByCustomerID(object sender, RoutedEventArgs e) /////////////////////// select by customer id 
+        {
+            int customerID = checkCustomerQan(filterByCustomerID_TB.Text);
+            if (customerID == -1)
+            {
+                MessageBox.Show($"There is no such Customer.");
+                return;
+            }
+            else if (customerID == 0)
+            {
+                MessageBox.Show("Customer Index must be number");
+                return;
+            }
+            var orders = db.orderTable
+              .Where(st => st.customer.customer_id == customerID)
+              .Include(x => x.product)
+              .Include(x => x.customer)
+              .Include(x => x.worker)
+              .Include(x => x.delivery_type)
+              .ToList();
+
+            List<dynamic> displayItems = new List<dynamic>();
+            foreach (var order in orders)
+            {
+                displayItems.Add(new
+                {
+                    order.order_id,
+                    order.product.product_id,
+                    order.product.product_name,
+                    order.customer.customer_id,
+                    order.customer.customer_name,
+                    order.customer.customer_surename,
+                    order.worker.worker_id,
+                    order.order_delivery_type_id,
+                    order.delivery_type.delivery_type1
+                });
+            }
+            this.orderDataGrid.ItemsSource = displayItems;
+        }
+        private void SelectByWorkerID(object sender, RoutedEventArgs e) /////////////////////// select by worker id 
+        {
+            int workerID = checkWorkerQan(filterByWorkerID_TB.Text);
+            if (workerID == -1)
+            {
+                MessageBox.Show($"There is no such Customer.");
+                return;
+            }
+            else if (workerID == 0)
+            {
+                MessageBox.Show("Customer Index must be number");
+                return;
+            }
+
+            var orders = db.orderTable
+              .Where(st => st.worker.worker_id == workerID)
+              .Include(x => x.product)
+              .Include(x => x.customer)
+              .Include(x => x.worker)
+              .Include(x => x.delivery_type)
+              .ToList();
+
+            List<dynamic> displayItems = new List<dynamic>();
+            foreach (var order in orders)
+            {
+                displayItems.Add(new
+                {
+                    order.order_id,
+                    order.product.product_id,
+                    order.product.product_name,
+                    order.customer.customer_id,
+                    order.customer.customer_name,
+                    order.customer.customer_surename,
+                    order.worker.worker_id,
+                    order.order_delivery_type_id,
+                    order.delivery_type.delivery_type1
+                });
+            }
+            this.orderDataGrid.ItemsSource = displayItems;
+        }
+        private void SelectByDeliveryID(object sender, RoutedEventArgs e) /////////////////////// select by delivery id 
+        {
+
+            int deliveryID = checkDeliveryTypeQan(filterByDeliveryID_TB.Text);
+            if (deliveryID == -1)
+            {
+                MessageBox.Show($"There is no such Customer.");
+                return;
+            }
+            else if (deliveryID == 0)
+            {
+                MessageBox.Show("Customer Index must be number");
+                return;
+            } 
+
+            var orders = db.orderTable
+              .Where(st => st.delivery_type.delivery_type_id == deliveryID)
+              .Include(x => x.product)
+              .Include(x => x.customer)
+              .Include(x => x.worker)
+              .Include(x => x.delivery_type)
+              .ToList();
+
+            List<dynamic> displayItems = new List<dynamic>();
+            foreach (var order in orders)
+            {
+                displayItems.Add(new
+                {
+                    order.order_id,
+                    order.product.product_id,
+                    order.product.product_name,
+                    order.customer.customer_id,
+                    order.customer.customer_name,
+                    order.customer.customer_surename,
+                    order.worker.worker_id,
+                    order.order_delivery_type_id,
+                    order.delivery_type.delivery_type1
+                });
+            }
+            this.orderDataGrid.ItemsSource = displayItems;
+        }
+
+        private void ReloadList()//////////////////////////////// Raload List 
         {
             var orders = db.orderTable
               .Include(x => x.product)
@@ -70,29 +387,61 @@ namespace SemesterProject_WPF_DB
                 displayItems.Add(new
                 {
                     order.order_id,
+                    order.product.product_id,
                     order.product.product_name,
+                    order.customer.customer_id,
                     order.customer.customer_name,
+                    order.customer.customer_surename,
                     order.worker.worker_id,
-                    order.delivery_type.delivery_type1,
-                    order.order_date
+                    order.order_delivery_type_id,
+                    order.delivery_type.delivery_type1
                 });
             }
             this.orderDataGrid.ItemsSource = displayItems;
         }
 
-        //private void AdjustColumnOrder()
-        //{
-        //    int x = 0;
-        //    if (x == 0)
-        //    {
-        //        orderDataGrid.Columns[0].Width = 20;  //index
-        //        orderDataGrid.Columns[1].Width = 90;  //Manufacturer
-        //        orderDataGrid.Columns[2].Width = 100; //model name 
-        //        orderDataGrid.Columns[3].Width = 120; //category
-        //        orderDataGrid.Columns[4].Width = 100; //Price
-        //        orderDataGrid.Columns[5].Width = 100; //Cost
-        //        x++;
-        //    }
-        //}
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            productIndex.Visibility = Visibility.Collapsed;
+            customerIndex.Visibility = Visibility.Collapsed;
+            workerIndex.Visibility = Visibility.Collapsed;
+            deliveryIndex.Visibility = Visibility.Collapsed;
+            button_CreateNewOrder.Visibility = Visibility.Collapsed;
+
+            filterByProduct.Visibility = Visibility.Visible;
+            filterByDelivery.Visibility = Visibility.Visible;
+            filterByWorker.Visibility = Visibility.Visible;
+            filterByCustomer.Visibility = Visibility.Visible;
+
+
+            filterByProductID_TB.Visibility = Visibility.Visible;
+            filterByCustomerID_TB.Visibility = Visibility.Visible;
+            filterByWorkerID_TB.Visibility = Visibility.Visible;
+            filterByDeliveryID_TB.Visibility = Visibility.Visible;
+        } /////////////////////// checked box event
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            productIndex.Visibility = Visibility.Visible;
+            customerIndex.Visibility = Visibility.Visible;
+            workerIndex.Visibility = Visibility.Visible;
+            deliveryIndex.Visibility = Visibility.Visible;
+            button_CreateNewOrder.Visibility = Visibility.Visible;
+
+            filterByProduct.Visibility = Visibility.Collapsed;
+            filterByDelivery.Visibility = Visibility.Collapsed;
+            filterByWorker.Visibility = Visibility.Collapsed;
+            filterByCustomer.Visibility = Visibility.Collapsed;
+
+            filterByProductID_TB.Visibility = Visibility.Collapsed;
+            filterByCustomerID_TB.Visibility = Visibility.Collapsed;
+            filterByWorkerID_TB.Visibility = Visibility.Collapsed;
+            filterByDeliveryID_TB.Visibility = Visibility.Collapsed;
+        } /////////////////////// unchecked box event 
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ReloadList();
+        }
     }
 }
+

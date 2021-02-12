@@ -9,7 +9,7 @@
         Title="TSM: New Delivery" 
         Height="400" Width="807.692" 
         Icon="../logo.ico" 
-Loaded="Window_Loaded">
+        Loaded="Window_Loaded">
 
     <Window.Resources>
         <CollectionViewSource x:Key="productViewSource" d:DesignSource="{d:DesignInstance {x:Type local:product}, CreateList=True}"/>

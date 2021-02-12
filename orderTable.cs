@@ -19,7 +19,6 @@ namespace SemesterProject_WPF_DB
         public int order_delivery_type_id { get; set; }
         public int order_customer_id { get; set; }
         public int order_worker_id { get; set; }
-        public System.DateTime order_date { get; set; }
     
         public virtual customer customer { get; set; }
         public virtual delivery_type delivery_type { get; set; }

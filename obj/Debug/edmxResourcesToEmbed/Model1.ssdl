@@ -39,7 +39,6 @@
     <Property Name="order_delivery_type_id" Type="int" Nullable="false" />
     <Property Name="order_customer_id" Type="int" Nullable="false" />
     <Property Name="order_worker_id" Type="int" Nullable="false" />
-    <Property Name="order_date" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="product">
     <Key>

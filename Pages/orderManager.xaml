@@ -5,25 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SemesterProject_WPF_DB"
         mc:Ignorable="d"
-        Title="orderManager" Height="500" Width="850">
+        Title="orderManager" Height="500" Width="1000" Loaded="Window_Loaded">
     <Grid Background="#FF66BCF4">
-        <DataGrid x:Name="orderDataGrid" HorizontalAlignment="Left" Height="449" Margin="10,10,0,0" VerticalAlignment="Top" Width="483"  CanUserResizeColumns="False" MinColumnWidth="17" IsReadOnly="true"/>
+        <DataGrid x:Name="orderDataGrid" HorizontalAlignment="Left" Height="449" Margin="10,10,0,0" VerticalAlignment="Top" Width="706"  CanUserResizeColumns="False" MinColumnWidth="17" IsReadOnly="true"/>
 
-        <Button Content="Button" HorizontalAlignment="Left" Height="76" Margin="511,383,0,0" VerticalAlignment="Top" Width="111" Click="button_productNewProduct_Click"/>
+        <Button x:Name="button_CreateNewOrder"  Content="Create New Order" HorizontalAlignment="Left" Height="34" Margin="743,130,0,0" VerticalAlignment="Top" Width="211" Click="button_productNewProduct_Click" FontFamily="Consolas" FontSize="14" FontWeight="Bold"/>
 
-        <Label Content="Product" HorizontalAlignment="Left" Height="27" Margin="511,13,0,0" VerticalAlignment="Top" Width="105" FontFamily="Consolas" FontSize="14" FontWeight="Bold" />
-        <Label Content="Customer" HorizontalAlignment="Left" Height="27" Margin="511,67,0,0" VerticalAlignment="Top" Width="105" FontFamily="Consolas" FontSize="14" FontWeight="Bold" />
-        <Label Content="Worker" HorizontalAlignment="Left" Height="27" Margin="511,122,0,0" VerticalAlignment="Top" Width="105" FontFamily="Consolas" FontSize="14" FontWeight="Bold" />
-        <Label Content="Delivery Type" HorizontalAlignment="Left" Height="27" Margin="512,175,0,0" VerticalAlignment="Top" Width="116" FontFamily="Consolas" FontSize="14" FontWeight="Bold" />
+        <Label Content="Product ID" HorizontalAlignment="Left" Height="27" Margin="765,15,0,0" VerticalAlignment="Top" Width="105" FontFamily="Consolas" FontSize="14" FontWeight="Bold" />
+        <Label Content="Customer ID" HorizontalAlignment="Left" Height="27" Margin="855,15,0,0" VerticalAlignment="Top" Width="105" FontFamily="Consolas" FontSize="14" FontWeight="Bold" />
+        <Label Content="Worker ID" HorizontalAlignment="Left" Height="27" Margin="765,71,0,0" VerticalAlignment="Top" Width="105" FontFamily="Consolas" FontSize="14" FontWeight="Bold" />
+        <Label Content="Delivery ID" Height="27" Margin="855,69,34,0" VerticalAlignment="Top" FontFamily="Consolas" FontSize="14" FontWeight="Bold" />
 
 
 
-        <TextBox x:Name="productIndex" HorizontalAlignment="Left" Height="27" Margin="511,40,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50" VerticalContentAlignment="Center" />
-        <TextBox x:Name="customerIndex" HorizontalAlignment="Left" Height="27" Margin="511,94,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50" VerticalContentAlignment="Center" />
-        <TextBox x:Name="workerIndex" HorizontalAlignment="Left" Height="27" Margin="511,149,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50" VerticalContentAlignment="Center" />
-        <TextBox x:Name="deliveryIndex" HorizontalAlignment="Left" Height="27" Margin="511,202,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50" VerticalContentAlignment="Center" />
-        <TextBox x:Name="dateTextBox" HorizontalAlignment="Left" Height="27" Margin="511,261,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50" VerticalContentAlignment="Center" />
-        <Label Content="Order Date" HorizontalAlignment="Left" Height="27" Margin="512,234,0,0" VerticalAlignment="Top" Width="116" FontFamily="Consolas" FontSize="14" FontWeight="Bold" />
+        <TextBox x:Name="productIndex" HorizontalAlignment="Left" Height="30" Margin="767,42,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50" VerticalContentAlignment="Center" />
+        <TextBox x:Name="customerIndex" HorizontalAlignment="Left" Height="30" Margin="855,42,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50" VerticalContentAlignment="Center" />
+        <TextBox x:Name="workerIndex" HorizontalAlignment="Left" Height="30" Margin="765,96,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50" VerticalContentAlignment="Center" />
+        <TextBox x:Name="deliveryIndex" HorizontalAlignment="Left" Height="30" Margin="855,96,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50" VerticalContentAlignment="Center" />
+
+        <CheckBox Content="Create / Filter" HorizontalAlignment="Left" Margin="767,428,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" FontSize="18" FontFamily="Consolas" FontWeight="Bold"/>
+
+        <Button x:Name="filterByProduct" Content="Filter only by &#xA;Product ID" HorizontalAlignment="Left" Height="50" Margin="743,130,0,0" VerticalAlignment="Top" Width="100" Click="SelectByProductID" FontFamily="Consolas" FontWeight="Bold"/>
+        <Button x:Name="filterByCustomer" Content="Filter only by &#xA;Customer ID" HorizontalAlignment="Left" Height="50" Margin="854,130,0,0" VerticalAlignment="Top" Width="100" FontFamily="Consolas" FontWeight="Bold" Click="SelectByCustomerID"/>
+        <Button x:Name="filterByWorker" Content="Filter only by &#xA;Worker ID" HorizontalAlignment="Left" Height="50" Margin="743,185,0,0" VerticalAlignment="Top" Width="100" FontFamily="Consolas" FontWeight="Bold" Click="SelectByWorkerID"/>
+        <Button x:Name="filterByDelivery" Content="Filter only By&#xA;Delivery ID" HorizontalAlignment="Left" Height="50" Margin="854,185,0,0" VerticalAlignment="Top" Width="100" FontFamily="Consolas" FontWeight="Bold" Click="SelectByDeliveryID"/>
+
+
+        <TextBox x:Name="filterByProductID_TB" HorizontalAlignment="Left" Height="30" Margin="767,42,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="50" RenderTransformOrigin="-0.518,-6.407"/>
+        <TextBox x:Name="filterByCustomerID_TB" HorizontalAlignment="Left" Height="30" Margin="855,42,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="50" RenderTransformOrigin="-0.518,-6.407"/>
+        <TextBox x:Name="filterByWorkerID_TB" HorizontalAlignment="Left" Height="30" Margin="765,96,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="50" RenderTransformOrigin="-0.518,-6.407"/>
+        <TextBox x:Name="filterByDeliveryID_TB" HorizontalAlignment="Left" Height="30" Margin="855,96,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="50" RenderTransformOrigin="-0.518,-6.407"/>
+       
+        <Button Content="Load default List" HorizontalAlignment="Left" Margin="743,370,0,0" VerticalAlignment="Top" Width="211" Height="43" FontSize="16" FontFamily="Consolas" FontWeight="Bold" Click="Button_Click"/>
+
 
     </Grid>
+
 </Window>
