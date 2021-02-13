@@ -137,7 +137,7 @@ namespace SemesterProject_WPF_DB
 
         private int checkCustomerQan(string field) /////////////////////// check Product Qantity 
         {
-            IQueryable<product> count1 = db.product;
+            IQueryable<customer> count1 = db.customer;
             var productsQuantity = count1.Count();
 
             int customerIndexInt;
@@ -162,14 +162,14 @@ namespace SemesterProject_WPF_DB
 
         private int checkWorkerQan(string field) /////////////////////// check Worker Qantity
         {
-            IQueryable<product> count1 = db.product;
-            var productsQuantity = count1.Count();
+            IQueryable<worker> count1 = db.worker;
+            var workerQuantity = count1.Count();
 
             int workerIndexResult;
             bool workerIntResult = int.TryParse(field, out workerIndexResult);
             if (workerIntResult)
             {
-                if (productsQuantity >= workerIndexResult)
+                if (workerQuantity >= workerIndexResult)
                 {
                     return workerIndexResult;
                 }
@@ -187,7 +187,7 @@ namespace SemesterProject_WPF_DB
 
         private int checkDeliveryTypeQan(string field) /////////////////////// check DeliveryType Qantity
         {
-            IQueryable<product> count1 = db.product;
+            IQueryable<delivery_type> count1 = db.delivery_type;
             var productsQuantity = count1.Count();
 
             int deliveryIndexInt;
