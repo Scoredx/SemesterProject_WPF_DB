@@ -47,7 +47,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="button_productCancel" Content="Close"   FontSize="14" Click="button_closeWindow_Click" Margin="598,376,61,8" Background="White" FontFamily="Consolas" FontWeight="Bold">
+        <Button x:Name="button_productCancel" Content="Exit"   FontSize="14" Click="button_closeWindow_Click" Margin="598,376,61,8" Background="White" FontFamily="Consolas" FontWeight="Bold">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

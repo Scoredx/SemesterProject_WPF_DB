@@ -11,16 +11,47 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <DataGrid x:Name="workerDataGrid" HorizontalAlignment="Left" Height="449" Margin="10,10,0,0" VerticalAlignment="Top" Width="350"  CanUserResizeColumns="False" MinColumnWidth="17" IsReadOnly="true" SelectionChanged="workerGrid_Selection"/>
-        <Button x:Name="button_deleteWorker"  Content="Delete Worker" HorizontalAlignment="Left" Height="43" Margin="394,309,0,0" VerticalAlignment="Top" Width="211" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Click="button_deleteWorker_Click"/>
-        <Label Content="Surname" HorizontalAlignment="Left" Height="30" Margin="372,51,0,0" VerticalAlignment="Top" Width="66" FontFamily="Consolas" FontSize="14" FontWeight="Bold" />
-        <Label Content="Pesel" HorizontalAlignment="Left" Height="30" Margin="372,86,0,0" VerticalAlignment="Top" Width="66" FontFamily="Consolas" FontSize="14" FontWeight="Bold" />
-        <TextBox x:Name="worker_nameTextBox" HorizontalAlignment="Left" Height="30" Margin="469,16,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" VerticalContentAlignment="Center" />
-        <TextBox x:Name="worker_surnameTextBox" HorizontalAlignment="Left" Height="30" Margin="469,51,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" VerticalContentAlignment="Center" />
-        <TextBox x:Name="worker_peselTextBox" HorizontalAlignment="Left" Height="30" Margin="469,86,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" VerticalContentAlignment="Center" />
-        <Label Content="Name" Height="30" Margin="372,16,527,0" VerticalAlignment="Top" FontFamily="Consolas" FontSize="14" FontWeight="Bold" />
-        <Button x:Name="button_updateWorker"  Content="Update Worker" HorizontalAlignment="Left" Height="43" Margin="394,261,0,0" VerticalAlignment="Top" Width="211" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Click="button_updateWorker_Click"/>
-        <Button x:Name="button_createNewWorker"  Content="Create New Worker" HorizontalAlignment="Left" Height="43" Margin="394,213,0,0" VerticalAlignment="Top" Width="211" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Click="button_createNewWorker_click"/>
-        <Button Content="Reload List" HorizontalAlignment="Left" Margin="394,357,0,0" VerticalAlignment="Top" Width="211" Height="43" FontSize="14" FontFamily="Consolas" Click="button_ReloadList" FontWeight="Bold"/>
-        <Button Content="Exit" HorizontalAlignment="Left" Height="43" Margin="394,405,0,0" VerticalAlignment="Top" Width="211" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Click="button_exit"/>
+        <Button x:Name="button_deleteWorker"  Content="Delete Worker" HorizontalAlignment="Left" Height="43" Margin="394,309,0,0" VerticalAlignment="Top" Width="211" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Click="button_deleteWorker_Click" Background="White">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Label Content="Surname" HorizontalAlignment="Left" Height="30" Margin="375,90,0,0" VerticalAlignment="Top" Width="66" FontFamily="Consolas" FontSize="14" FontWeight="Bold" />
+        <Label Content="Pesel" HorizontalAlignment="Left" Height="30" Margin="375,125,0,0" VerticalAlignment="Top" Width="66" FontFamily="Consolas" FontSize="14" FontWeight="Bold" RenderTransformOrigin="0.5,0.3" />
+        <TextBox x:Name="worker_nameTextBox" HorizontalAlignment="Left" Height="30" Margin="472,55,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" VerticalContentAlignment="Center" />
+        <TextBox x:Name="worker_surnameTextBox" HorizontalAlignment="Left" Height="30" Margin="472,90,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" VerticalContentAlignment="Center" />
+        <TextBox x:Name="worker_peselTextBox" HorizontalAlignment="Left" Height="30" Margin="472,125,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" VerticalContentAlignment="Center" />
+        <Label Content="Name" Height="30" Margin="375,55,261,0" VerticalAlignment="Top" FontFamily="Consolas" FontSize="14" FontWeight="Bold" />
+        <Button x:Name="button_updateWorker"  Content="Update Worker" HorizontalAlignment="Left" Height="43" Margin="394,261,0,0" VerticalAlignment="Top" Width="211" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Click="button_updateWorker_Click" Background="White">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="button_createNewWorker"  Content="Create New Worker" HorizontalAlignment="Left" Height="43" Margin="394,213,0,0" VerticalAlignment="Top" Width="211" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Click="button_createNewWorker_click" Background="White">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Content="Reload List" HorizontalAlignment="Left" Margin="394,357,0,0" VerticalAlignment="Top" Width="211" Height="43" FontSize="14" FontFamily="Consolas" Click="button_ReloadList" FontWeight="Bold" Background="White">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Content="Exit" HorizontalAlignment="Left" Height="43" Margin="394,405,0,0" VerticalAlignment="Top" Width="211" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Click="button_exit" Background="White">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Label Content="Name" HorizontalAlignment="Left" Height="30" Margin="375,60,0,0" VerticalAlignment="Top" Width="66" FontFamily="Consolas" FontSize="14" FontWeight="Bold" />
     </Grid>
 </Window>

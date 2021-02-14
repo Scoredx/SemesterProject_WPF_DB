@@ -105,7 +105,6 @@ namespace SemesterProject_WPF_DB
                 MessageBox.Show("There is an empty field");
             }
         }
-
         private int checkProductQan(string field) /////////////////////// check Product Qantity
         {
             IQueryable<product> count1 = db.product;
@@ -202,7 +201,6 @@ namespace SemesterProject_WPF_DB
             }
 
         }
-
         private void SelectByProductID(object sender, RoutedEventArgs e) /////////////////////// select by product id 
         {
             int productID = checkProductQan(productIndex.Text);
@@ -400,6 +398,8 @@ namespace SemesterProject_WPF_DB
         } /////////////////////// checked box event
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
+            button_CreateNewOrder.Visibility = Visibility.Visible;
+
             filterByProduct.Visibility = Visibility.Collapsed;
             filterByDelivery.Visibility = Visibility.Collapsed;
             filterByWorker.Visibility = Visibility.Collapsed;
@@ -409,6 +409,10 @@ namespace SemesterProject_WPF_DB
         private void button_ReloadList(object sender, RoutedEventArgs e)
         {
             ReloadList();
+        }
+        private void button_closeWindow_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

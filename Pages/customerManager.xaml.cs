@@ -209,5 +209,10 @@ namespace SemesterProject_WPF_DB
             this.customer_emailTextBox.Text = string.Empty;
             this.customer_nipTextBox.Text = string.Empty;
         }
+
+        private void button_Exit(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -10,7 +10,13 @@
 
         <DataGrid x:Name="customerDataGrid" HorizontalAlignment="Left" Height="449" Margin="10,10,0,0" VerticalAlignment="Top" Width="650"  CanUserResizeColumns="False" MinColumnWidth="17" IsReadOnly="true" SelectionChanged="customerGrid_Selection"/>
 
-        <Button x:Name="button_deleteCustomer"  Content="Delete Customer" HorizontalAlignment="Left" Height="43" Margin="699,366,0,0" VerticalAlignment="Top" Width="211" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Click="button_deleteCustomer_Click"/>
+        <Button x:Name="button_deleteCustomer"  Content="Delete Customer" HorizontalAlignment="Left" Height="43" Margin="705,320,0,0" VerticalAlignment="Top" Width="211" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Click="button_deleteCustomer_Click" Background="White">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
         <Label Content="Surname" HorizontalAlignment="Left" Height="30" Margin="678,45,0,0" VerticalAlignment="Top" Width="66" FontFamily="Consolas" FontSize="14" FontWeight="Bold" />
         <Label Content="Address" HorizontalAlignment="Left" Height="30" Margin="678,80,0,0" VerticalAlignment="Top" Width="66" FontFamily="Consolas" FontSize="14" FontWeight="Bold" />
         <Label Content="Phone" Height="30" Margin="678,115,221,0" VerticalAlignment="Top" FontFamily="Consolas" FontSize="14" FontWeight="Bold" />
@@ -22,12 +28,37 @@
         <TextBox x:Name="customer_emailTextBox" HorizontalAlignment="Left" Height="30" Margin="775,150,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" VerticalContentAlignment="Center" />
         <TextBox x:Name="customer_nipTextBox" HorizontalAlignment="Left" Height="30" Margin="775,185,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" VerticalContentAlignment="Center" />
 
-        <Button Content="Reload List" HorizontalAlignment="Left" Margin="699,414,0,0" VerticalAlignment="Top" Width="211" Height="43" FontSize="14" FontFamily="Consolas" Click="button_ReloadList" FontWeight="Bold"/>
+        <Button Content="Reload List" HorizontalAlignment="Left" Margin="705,368,0,0" VerticalAlignment="Top" Width="211" Height="43" FontSize="14" FontFamily="Consolas" Click="button_ReloadList" FontWeight="Bold" Background="White">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
         <Label Content="Email" Height="30" Margin="678,150,221,0" VerticalAlignment="Top" FontFamily="Consolas" FontSize="14" FontWeight="Bold" />
         <Label Content="Nip" Height="30" Margin="678,185,221,0" VerticalAlignment="Top" FontFamily="Consolas" FontSize="14" FontWeight="Bold" />
         <Label Content="Name" Height="30" Margin="678,10,221,0" VerticalAlignment="Top" FontFamily="Consolas" FontSize="14" FontWeight="Bold" />
-        <Button x:Name="button_updateCustomer"  Content="Update Customer" HorizontalAlignment="Left" Height="43" Margin="699,318,0,0" VerticalAlignment="Top" Width="211" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Click="button_updateCustomer_Click"/>
-        <Button x:Name="button_createNewCustomer"  Content="Create New Customer" HorizontalAlignment="Left" Height="43" Margin="699,270,0,0" VerticalAlignment="Top" Width="211" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Click="button_createNewCustomer_click"/>
+        <Button x:Name="button_updateCustomer"  Content="Update Customer" HorizontalAlignment="Left" Height="43" Margin="705,272,0,0" VerticalAlignment="Top" Width="211" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Click="button_updateCustomer_Click" Background="White">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="button_createNewCustomer"  Content="Create New Customer" HorizontalAlignment="Left" Height="43" Margin="705,224,0,0" VerticalAlignment="Top" Width="211" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Click="button_createNewCustomer_click" Background="White">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Content="Exit" HorizontalAlignment="Left" Margin="705,416,0,0" VerticalAlignment="Top" Width="211" Height="43" FontSize="14" FontFamily="Consolas" Click="button_Exit" FontWeight="Bold" Background="White">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
 
 
     </Grid>
