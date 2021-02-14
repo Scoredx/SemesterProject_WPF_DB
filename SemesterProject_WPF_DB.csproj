@@ -85,9 +85,11 @@
     <Compile Include="addressTable.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Classes\WorkerViewModel.cs" />
     <Compile Include="customer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Classes\CustomerViewModel.cs" />
     <Compile Include="delivery_type.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -109,6 +111,7 @@
     <Compile Include="orderTable.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Classes\OrderViewModel.cs" />
     <Compile Include="Pages\customerManager.xaml.cs">
       <DependentUpon>customerManager.xaml</DependentUpon>
     </Compile>
@@ -211,13 +214,14 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="background.png" />
-    <Resource Include="logo.ico" />
+    <Resource Include="Images\background.png" />
+    <Resource Include="Images\logo.ico" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="background.png" />
     <Content Include="Database1.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -235,9 +239,10 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-    <Resource Include="Pages\warehouse.png" />
-    <Resource Include="Pages\van.gif" />
+    <Resource Include="Images\warehouse.png" />
+    <Resource Include="Images\van.gif" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

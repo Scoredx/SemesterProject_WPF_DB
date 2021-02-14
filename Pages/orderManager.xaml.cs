@@ -23,7 +23,7 @@ namespace SemesterProject_WPF_DB
         Database1Entities1 db = new Database1Entities1();
 
         /// <summary>
-        /// Initialize data from db with foregin keys
+        /// Initialize UI  and  data from db with foregin keys as readable text
         /// </summary>
         public orderManager()
         {
@@ -36,23 +36,19 @@ namespace SemesterProject_WPF_DB
             filterByDelivery.Visibility = Visibility.Collapsed;
             filterByWorker.Visibility = Visibility.Collapsed;
             filterByCustomer.Visibility = Visibility.Collapsed;
-
-            filterByProductID_TB.Visibility = Visibility.Collapsed;
-            filterByCustomerID_TB.Visibility = Visibility.Collapsed;
-            filterByWorkerID_TB.Visibility = Visibility.Collapsed;
-            filterByDeliveryID_TB.Visibility = Visibility.Collapsed;
         }
 
         private void button_productNewProduct_Click(object sender, RoutedEventArgs e) /////////////////////// create New Product
-        { 
+        {
             if (productIndex.Text != "" && customerIndex.Text != "" && workerIndex.Text != "" && deliveryIndex.Text != "")
             {
                 int productID = checkProductQan(productIndex.Text);
-                if(productID == -1)
+                if (productID == -1)
                 {
                     MessageBox.Show($"There is no such Product.");
                     return;
-                }else if(productID == 0)
+                }
+                else if (productID == 0)
                 {
                     MessageBox.Show("Product Index must be number");
                     return;
@@ -73,24 +69,24 @@ namespace SemesterProject_WPF_DB
                 int workerID = checkWorkerQan(workerIndex.Text);
                 if (workerID == -1)
                 {
-                    MessageBox.Show($"There is no such Customer.");
+                    MessageBox.Show($"There is no such Worker.");
                     return;
                 }
                 else if (workerID == 0)
                 {
-                    MessageBox.Show("Customer Index must be number");
+                    MessageBox.Show("Worker Index must be number");
                     return;
                 }
 
                 int deliveryID = checkDeliveryTypeQan(deliveryIndex.Text);
                 if (deliveryID == -1)
                 {
-                    MessageBox.Show($"There is no such Customer.");
+                    MessageBox.Show($"There is no such Delivery Type.");
                     return;
                 }
                 else if (deliveryID == 0)
                 {
-                    MessageBox.Show("Customer Index must be number");
+                    MessageBox.Show("Delivery Index must be number");
                     return;
                 }
                 orderTable productObject = new orderTable()
@@ -133,8 +129,7 @@ namespace SemesterProject_WPF_DB
                 return 0;
             }
 
-        } 
-
+        }
         private int checkCustomerQan(string field) /////////////////////// check Product Qantity 
         {
             IQueryable<customer> count1 = db.customer;
@@ -159,7 +154,6 @@ namespace SemesterProject_WPF_DB
             }
 
         }
-
         private int checkWorkerQan(string field) /////////////////////// check Worker Qantity
         {
             IQueryable<worker> count1 = db.worker;
@@ -184,7 +178,6 @@ namespace SemesterProject_WPF_DB
             }
 
         }
-
         private int checkDeliveryTypeQan(string field) /////////////////////// check DeliveryType Qantity
         {
             IQueryable<delivery_type> count1 = db.delivery_type;
@@ -210,10 +203,9 @@ namespace SemesterProject_WPF_DB
 
         }
 
-
         private void SelectByProductID(object sender, RoutedEventArgs e) /////////////////////// select by product id 
         {
-            int productID = checkProductQan(filterByProductID_TB.Text);
+            int productID = checkProductQan(productIndex.Text);
             if (productID == -1)
             {
                 MessageBox.Show($"There is no such Product.");
@@ -224,7 +216,6 @@ namespace SemesterProject_WPF_DB
                 MessageBox.Show("Product Index must be number");
                 return;
             }
-
             var orders = db.orderTable
               .Where(st => st.product.product_id == productID)
               .Include(x => x.product)
@@ -253,7 +244,7 @@ namespace SemesterProject_WPF_DB
         }
         private void SelectByCustomerID(object sender, RoutedEventArgs e) /////////////////////// select by customer id 
         {
-            int customerID = checkCustomerQan(filterByCustomerID_TB.Text);
+            int customerID = checkCustomerQan(customerIndex.Text);
             if (customerID == -1)
             {
                 MessageBox.Show($"There is no such Customer.");
@@ -292,18 +283,17 @@ namespace SemesterProject_WPF_DB
         }
         private void SelectByWorkerID(object sender, RoutedEventArgs e) /////////////////////// select by worker id 
         {
-            int workerID = checkWorkerQan(filterByWorkerID_TB.Text);
+            int workerID = checkWorkerQan(workerIndex.Text);
             if (workerID == -1)
             {
-                MessageBox.Show($"There is no such Customer.");
+                MessageBox.Show($"There is no such Worker.");
                 return;
             }
             else if (workerID == 0)
             {
-                MessageBox.Show("Customer Index must be number");
+                MessageBox.Show("Worker Index must be number");
                 return;
             }
-
             var orders = db.orderTable
               .Where(st => st.worker.worker_id == workerID)
               .Include(x => x.product)
@@ -332,18 +322,17 @@ namespace SemesterProject_WPF_DB
         }
         private void SelectByDeliveryID(object sender, RoutedEventArgs e) /////////////////////// select by delivery id 
         {
-
-            int deliveryID = checkDeliveryTypeQan(filterByDeliveryID_TB.Text);
+            int deliveryID = checkDeliveryTypeQan(deliveryIndex.Text);
             if (deliveryID == -1)
             {
-                MessageBox.Show($"There is no such Customer.");
+                MessageBox.Show($"There is no such Delivery Type.");
                 return;
             }
             else if (deliveryID == 0)
             {
-                MessageBox.Show("Customer Index must be number");
+                MessageBox.Show("Delivery Index must be a number");
                 return;
-            } 
+            }
 
             var orders = db.orderTable
               .Where(st => st.delivery_type.delivery_type_id == deliveryID)
@@ -381,20 +370,20 @@ namespace SemesterProject_WPF_DB
               .Include(x => x.delivery_type)
               .ToList();
 
-            List<dynamic> displayItems = new List<dynamic>();
+            List<OrderViewModel> displayItems = new List<OrderViewModel>();
             foreach (var order in orders)
             {
-                displayItems.Add(new
+                displayItems.Add(new OrderViewModel
                 {
-                    order.order_id,
-                    order.product.product_id,
-                    order.product.product_name,
-                    order.customer.customer_id,
-                    order.customer.customer_name,
-                    order.customer.customer_surename,
-                    order.worker.worker_id,
-                    order.order_delivery_type_id,
-                    order.delivery_type.delivery_type1
+                    order_id = order.order_id,
+                    product_id = order.product.product_id,
+                    product_name = order.product.product_name,
+                    customer_id = order.customer.customer_id,
+                    customer_name = order.customer.customer_name,
+                    customer_surname = order.customer.customer_surename,
+                    worker_id = order.worker.worker_id,
+                    delivery_type_id = order.order_delivery_type_id,
+                    delivery_type1 = order.delivery_type.delivery_type1
                 });
             }
             this.orderDataGrid.ItemsSource = displayItems;
@@ -402,43 +391,22 @@ namespace SemesterProject_WPF_DB
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            productIndex.Visibility = Visibility.Collapsed;
-            customerIndex.Visibility = Visibility.Collapsed;
-            workerIndex.Visibility = Visibility.Collapsed;
-            deliveryIndex.Visibility = Visibility.Collapsed;
             button_CreateNewOrder.Visibility = Visibility.Collapsed;
 
             filterByProduct.Visibility = Visibility.Visible;
             filterByDelivery.Visibility = Visibility.Visible;
             filterByWorker.Visibility = Visibility.Visible;
             filterByCustomer.Visibility = Visibility.Visible;
-
-
-            filterByProductID_TB.Visibility = Visibility.Visible;
-            filterByCustomerID_TB.Visibility = Visibility.Visible;
-            filterByWorkerID_TB.Visibility = Visibility.Visible;
-            filterByDeliveryID_TB.Visibility = Visibility.Visible;
         } /////////////////////// checked box event
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            productIndex.Visibility = Visibility.Visible;
-            customerIndex.Visibility = Visibility.Visible;
-            workerIndex.Visibility = Visibility.Visible;
-            deliveryIndex.Visibility = Visibility.Visible;
-            button_CreateNewOrder.Visibility = Visibility.Visible;
-
             filterByProduct.Visibility = Visibility.Collapsed;
             filterByDelivery.Visibility = Visibility.Collapsed;
             filterByWorker.Visibility = Visibility.Collapsed;
             filterByCustomer.Visibility = Visibility.Collapsed;
-
-            filterByProductID_TB.Visibility = Visibility.Collapsed;
-            filterByCustomerID_TB.Visibility = Visibility.Collapsed;
-            filterByWorkerID_TB.Visibility = Visibility.Collapsed;
-            filterByDeliveryID_TB.Visibility = Visibility.Collapsed;
         } /////////////////////// unchecked box event 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void button_ReloadList(object sender, RoutedEventArgs e)
         {
             ReloadList();
         }

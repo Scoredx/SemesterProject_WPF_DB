@@ -25,7 +25,6 @@ namespace SemesterProject_WPF_DB
         public MainWindow()
         {
             InitializeComponent();
-
             DataContext = this;
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -36,7 +35,6 @@ namespace SemesterProject_WPF_DB
             newDelivery newDelivery = new newDelivery();
             newDelivery.Show();
         }
-
         private void productManager_button(object sender, RoutedEventArgs e)
         {
             productManager productManager = new productManager();
@@ -47,19 +45,16 @@ namespace SemesterProject_WPF_DB
             orderManager orderManager = new orderManager();
             orderManager.Show();
         }
-
         private void customerManager_button(object sender, RoutedEventArgs e)
         {
             customerManager customerManager = new customerManager();
             customerManager.Show();
         }
-
         private void staffManager_button(object sender, RoutedEventArgs e)
         {
             staffManager staffManager = new staffManager();
             staffManager.Show();
         }
-
         private void exit_button(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();

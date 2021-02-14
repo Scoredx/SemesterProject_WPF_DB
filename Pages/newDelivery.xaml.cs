@@ -22,7 +22,6 @@ namespace SemesterProject_WPF_DB
     public partial class newDelivery : Window
     {
         Database1Entities1 db = new Database1Entities1();
-
         public newDelivery()
         {
             InitializeComponent();
@@ -50,7 +49,6 @@ namespace SemesterProject_WPF_DB
                     MessageBox.Show("Cost must be number");
                     return;
                 }
-                
                 product productObject = new product()
                 {
                     product_name = product_NameTextBox.Text,
@@ -63,25 +61,15 @@ namespace SemesterProject_WPF_DB
                 db.SaveChanges();
                 ReloadList();
             }
-            else
-            {
-                MessageBox.Show("All fields must be filled");
-            }
-
-        }
-
-        private void button_productReload_Click(object sender, RoutedEventArgs e)
-        {
-            ReloadList();
-        }
-
-        private void button_closeWindow_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
+            else MessageBox.Show("All fields must be filled");
         }
         private void button_productDelete_Click(object sender, RoutedEventArgs e)
         {
-
+            var prdct = db.product.FirstOrDefault(y => y.product_id == productID);
+            if (prdct != null) db.product.Remove(prdct);
+            db.SaveChanges();
+            clearTextBox();
+            ReloadList();
             product p = this.productDataGrid.SelectedItem as product;
             if (p != null)
             {
@@ -95,10 +83,9 @@ namespace SemesterProject_WPF_DB
             db.SaveChanges();
             ReloadList();
         }
-
+        private int  productID = 0;
         private void productGrid_Selection(object sender, SelectionChangedEventArgs e)
         {
-            
             product p = this.productDataGrid.SelectedItem as product;
             if(p is null)
             {
@@ -114,6 +101,15 @@ namespace SemesterProject_WPF_DB
             this.product_CategoryTextBox2.Text = p.product_category_name;
             this.product_PriceTextBox2.Text = p.product_price.ToString();
             this.product_CostTextBox2.Text = p.product_cost.ToString();
+            productID = p.product_id;
+        }
+        private void button_productReload_Click(object sender, RoutedEventArgs e)
+        {
+            ReloadList();
+        }
+        private void button_closeWindow_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
         private void AdjustColumnOrder()
         {
@@ -129,7 +125,6 @@ namespace SemesterProject_WPF_DB
                 productDataGrid.Columns[5].Width = 100; //Cost
                 x++;
             }
-            
             productDataGrid.Columns[0].DisplayIndex = 0; //index
             productDataGrid.Columns[1].DisplayIndex = 3; //Manufacturer
             productDataGrid.Columns[2].DisplayIndex = 2; //model name 
@@ -142,11 +137,18 @@ namespace SemesterProject_WPF_DB
             productDataGrid.Columns[4].Header = "Price";
             productDataGrid.Columns[5].Header = "Cost";
         }
-
         private void ReloadList()
         {
             this.productDataGrid.ItemsSource = db.product.ToList();
             AdjustColumnOrder();
+        }
+        private void clearTextBox()
+        {
+            this.product_ManufacturerTextBox2.Text = string.Empty;
+            this.product_NameTextBox2.Text = string.Empty;
+            this.product_CategoryTextBox2.Text = string.Empty;
+            this.product_PriceTextBox2.Text = string.Empty.ToString();
+            this.product_CostTextBox2.Text = string.Empty.ToString();
         }
     }
 }
