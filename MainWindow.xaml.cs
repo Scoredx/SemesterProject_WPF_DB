@@ -19,6 +19,7 @@ namespace SemesterProject_WPF_DB
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
+    /// It contains buttons that open windows with appropriate functions depending on the context
     /// </summary>
     public partial class MainWindow : Window
     {

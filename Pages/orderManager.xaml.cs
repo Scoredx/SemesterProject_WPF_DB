@@ -17,6 +17,7 @@ namespace SemesterProject_WPF_DB
 {
     /// <summary>
     /// Interaction logic for orderManager.xaml
+    /// Contains basic SQL Crud Functions
     /// </summary>
     public partial class orderManager : Window
     {
@@ -25,6 +26,10 @@ namespace SemesterProject_WPF_DB
         /// <summary>
         /// Initialize UI  and  data from db with foregin keys as readable text
         /// </summary>
+        
+        /// ///<remarks>
+        /// reload list writes order data table to data grid along with informations connected to other tables with foreign keys
+        /// </remarks>
         public orderManager()
         {
             InitializeComponent();
@@ -38,7 +43,7 @@ namespace SemesterProject_WPF_DB
             filterByCustomer.Visibility = Visibility.Collapsed;
         }
 
-        private void button_productNewProduct_Click(object sender, RoutedEventArgs e) /////////////////////// create New Product
+        private void button_productNewProduct_Click(object sender, RoutedEventArgs e)
         {
             if (productIndex.Text != "" && customerIndex.Text != "" && workerIndex.Text != "" && deliveryIndex.Text != "")
             {
@@ -105,7 +110,7 @@ namespace SemesterProject_WPF_DB
                 MessageBox.Show("There is an empty field");
             }
         }
-        private int checkProductQan(string field) /////////////////////// check Product Qantity
+        private int checkProductQan(string field) 
         {
             IQueryable<product> count1 = db.product;
             var productsQuantity = count1.Count();
@@ -129,7 +134,7 @@ namespace SemesterProject_WPF_DB
             }
 
         }
-        private int checkCustomerQan(string field) /////////////////////// check Product Qantity 
+        private int checkCustomerQan(string field)  
         {
             IQueryable<customer> count1 = db.customer;
             var productsQuantity = count1.Count();
@@ -153,7 +158,7 @@ namespace SemesterProject_WPF_DB
             }
 
         }
-        private int checkWorkerQan(string field) /////////////////////// check Worker Qantity
+        private int checkWorkerQan(string field) 
         {
             IQueryable<worker> count1 = db.worker;
             var workerQuantity = count1.Count();
@@ -177,7 +182,7 @@ namespace SemesterProject_WPF_DB
             }
 
         }
-        private int checkDeliveryTypeQan(string field) /////////////////////// check DeliveryType Qantity
+        private int checkDeliveryTypeQan(string field) 
         {
             IQueryable<delivery_type> count1 = db.delivery_type;
             var productsQuantity = count1.Count();
@@ -201,7 +206,7 @@ namespace SemesterProject_WPF_DB
             }
 
         }
-        private void SelectByProductID(object sender, RoutedEventArgs e) /////////////////////// select by product id 
+        private void SelectByProductID(object sender, RoutedEventArgs e) 
         {
             int productID = checkProductQan(productIndex.Text);
             if (productID == -1)
@@ -240,7 +245,7 @@ namespace SemesterProject_WPF_DB
             }
             this.orderDataGrid.ItemsSource = displayItems;
         }
-        private void SelectByCustomerID(object sender, RoutedEventArgs e) /////////////////////// select by customer id 
+        private void SelectByCustomerID(object sender, RoutedEventArgs e) 
         {
             int customerID = checkCustomerQan(customerIndex.Text);
             if (customerID == -1)
@@ -279,7 +284,7 @@ namespace SemesterProject_WPF_DB
             }
             this.orderDataGrid.ItemsSource = displayItems;
         }
-        private void SelectByWorkerID(object sender, RoutedEventArgs e) /////////////////////// select by worker id 
+        private void SelectByWorkerID(object sender, RoutedEventArgs e) 
         {
             int workerID = checkWorkerQan(workerIndex.Text);
             if (workerID == -1)
@@ -318,7 +323,7 @@ namespace SemesterProject_WPF_DB
             }
             this.orderDataGrid.ItemsSource = displayItems;
         }
-        private void SelectByDeliveryID(object sender, RoutedEventArgs e) /////////////////////// select by delivery id 
+        private void SelectByDeliveryID(object sender, RoutedEventArgs e) 
         {
             int deliveryID = checkDeliveryTypeQan(deliveryIndex.Text);
             if (deliveryID == -1)
@@ -358,8 +363,7 @@ namespace SemesterProject_WPF_DB
             }
             this.orderDataGrid.ItemsSource = displayItems;
         }
-
-        private void ReloadList()//////////////////////////////// Raload List 
+        private void ReloadList()
         {
             var orders = db.orderTable
               .Include(x => x.product)
@@ -386,7 +390,6 @@ namespace SemesterProject_WPF_DB
             }
             this.orderDataGrid.ItemsSource = displayItems;
         }
-
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             button_CreateNewOrder.Visibility = Visibility.Collapsed;
@@ -395,7 +398,7 @@ namespace SemesterProject_WPF_DB
             filterByDelivery.Visibility = Visibility.Visible;
             filterByWorker.Visibility = Visibility.Visible;
             filterByCustomer.Visibility = Visibility.Visible;
-        } /////////////////////// checked box event
+        } 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             button_CreateNewOrder.Visibility = Visibility.Visible;
@@ -404,8 +407,7 @@ namespace SemesterProject_WPF_DB
             filterByDelivery.Visibility = Visibility.Collapsed;
             filterByWorker.Visibility = Visibility.Collapsed;
             filterByCustomer.Visibility = Visibility.Collapsed;
-        } /////////////////////// unchecked box event 
-
+        }
         private void button_ReloadList(object sender, RoutedEventArgs e)
         {
             ReloadList();

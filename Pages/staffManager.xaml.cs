@@ -16,10 +16,15 @@ namespace SemesterProject_WPF_DB
 {
     /// <summary>
     /// Interaction logic for customerManager.xaml
+    /// Contains basic SQL Crud functions  
     /// </summary>
     public partial class staffManager : Window
     {
         Database1Entities1 db = new Database1Entities1();
+
+        /// <summary>
+        /// Initializes UI and puts the data from worker Table into datagrid using a public class as an Object
+        /// </summary>
         public staffManager()
         {
             InitializeComponent();
@@ -109,7 +114,7 @@ namespace SemesterProject_WPF_DB
             this.worker_peselTextBox.Text = p.worker_pesel.ToString();
             this.workerID = p.worker_id;
         }
-        private void ReloadList()//////////////////////////////// Raload List 
+        private void ReloadList()
         {
             var customers = db.worker
               .ToList();

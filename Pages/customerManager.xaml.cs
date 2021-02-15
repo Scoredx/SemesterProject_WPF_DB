@@ -20,6 +20,10 @@ namespace SemesterProject_WPF_DB
     public partial class customerManager : Window
     {
         Database1Entities1 db = new Database1Entities1();
+
+        /// <summary>
+        /// Initializes UI elements and puts the data from customer Table into datagrid using a public class as an Object
+        /// </summary>
         public customerManager()
         {
             InitializeComponent();
@@ -156,7 +160,7 @@ namespace SemesterProject_WPF_DB
             this.customer_nipTextBox.Text = p.customer_nip;
             this.customerID = p.customer_id;
         }
-        private int checkAddresstQan(string field) /////////////////////// check address Qantity
+        private int checkAddresstQan(string field) 
         {
             IQueryable<addressTable> count1 = db.addressTable;
             var addressQuantity = count1.Count();
@@ -178,7 +182,7 @@ namespace SemesterProject_WPF_DB
                 return 0;
             }
         }
-        private void ReloadList()//////////////////////////////// Raload List 
+        private void ReloadList() 
         {
             var customers = db.customer
               .Include("addressTable")

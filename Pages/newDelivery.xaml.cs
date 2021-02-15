@@ -18,10 +18,18 @@ namespace SemesterProject_WPF_DB
 {
     /// <summary>
     /// Interaction logic for newDelivery.xaml
+    /// Contains basic SQL Crud functions  
     /// </summary>
+    ///<remarks>
+    /// This class can ADD and REMOVE from Database Table and get the selected table row and convert it do object
+    /// </remarks>
     public partial class newDelivery : Window
     {
         Database1Entities1 db = new Database1Entities1();
+
+        /// <summary>
+        /// Initializes UI elements and puts the data from product Table into datagrid
+        /// </summary>
         public newDelivery()
         {
             InitializeComponent();
