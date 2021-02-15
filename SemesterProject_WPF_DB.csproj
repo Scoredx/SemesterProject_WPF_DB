@@ -85,6 +85,7 @@
     <Compile Include="addressTable.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Classes\ProductService.cs" />
     <Compile Include="Classes\WorkerViewModel.cs" />
     <Compile Include="customer.cs">
       <DependentUpon>Model1.tt</DependentUpon>

@@ -5,16 +5,27 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemesterProject_WPF_DB", "SemesterProject_WPF_DB.csproj", "{A6553200-A7F7-4BA9-AB0C-9F0039893009}"
 EndProject
+Project("{840C416C-B8F3-42BC-B0DD-F6BB14C9F8CB}") = "SemesterProject", "..\SemesterProject\SemesterProject.aiproj", "{901596BF-A02E-4305-9D31-E66DB9D14FB8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		DefaultBuild|Any CPU = DefaultBuild|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{A6553200-A7F7-4BA9-AB0C-9F0039893009}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A6553200-A7F7-4BA9-AB0C-9F0039893009}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6553200-A7F7-4BA9-AB0C-9F0039893009}.DefaultBuild|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6553200-A7F7-4BA9-AB0C-9F0039893009}.DefaultBuild|Any CPU.Build.0 = Debug|Any CPU
 		{A6553200-A7F7-4BA9-AB0C-9F0039893009}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6553200-A7F7-4BA9-AB0C-9F0039893009}.Release|Any CPU.Build.0 = Release|Any CPU
+		{901596BF-A02E-4305-9D31-E66DB9D14FB8}.Debug|Any CPU.ActiveCfg = DefaultBuild
+		{901596BF-A02E-4305-9D31-E66DB9D14FB8}.Debug|Any CPU.Build.0 = DefaultBuild
+		{901596BF-A02E-4305-9D31-E66DB9D14FB8}.DefaultBuild|Any CPU.ActiveCfg = DefaultBuild
+		{901596BF-A02E-4305-9D31-E66DB9D14FB8}.DefaultBuild|Any CPU.Build.0 = DefaultBuild
+		{901596BF-A02E-4305-9D31-E66DB9D14FB8}.Release|Any CPU.ActiveCfg = DefaultBuild
+		{901596BF-A02E-4305-9D31-E66DB9D14FB8}.Release|Any CPU.Build.0 = DefaultBuild
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

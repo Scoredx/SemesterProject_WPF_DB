@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data.Entity;
 using System.Collections;
+using SemesterProject_WPF_DB.Classes;
 
 namespace SemesterProject_WPF_DB
 {
@@ -20,20 +21,20 @@ namespace SemesterProject_WPF_DB
     /// Interaction logic for newDelivery.xaml
     /// Contains basic SQL Crud functions  
     /// </summary>
+    
     ///<remarks>
     /// This class can ADD and REMOVE from Database Table and get the selected table row and convert it do object
     /// </remarks>
     public partial class newDelivery : Window
     {
-        Database1Entities1 db = new Database1Entities1();
-
+        ProductService ProductService = new ProductService();
         /// <summary>
         /// Initializes UI elements and puts the data from product Table into datagrid
         /// </summary>
         public newDelivery()
         {
             InitializeComponent();
-            this.productDataGrid.ItemsSource = db.product.ToList();
+            this.productDataGrid.ItemsSource = ProductService.GetList();
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -57,38 +58,16 @@ namespace SemesterProject_WPF_DB
                     MessageBox.Show("Cost must be number");
                     return;
                 }
-                product productObject = new product()
-                {
-                    product_name = product_NameTextBox.Text,
-                    product_category_name = product_CategoryTextBox.Text,
-                    product_manufacturer_name = product_ManufacturerTextBox.Text,
-                    product_price = priceDecimal,
-                    product_cost = costDecimal
-                };
-                db.product.Add(productObject);
-                db.SaveChanges();
+                ProductService.AddProduct(priceDecimal, costDecimal, product_NameTextBox.Text, product_CategoryTextBox.Text,product_ManufacturerTextBox.Text);
                 ReloadList();
             }
             else MessageBox.Show("All fields must be filled");
         }
         private void button_productDelete_Click(object sender, RoutedEventArgs e)
         {
-            var prdct = db.product.FirstOrDefault(y => y.product_id == productID);
-            if (prdct != null) db.product.Remove(prdct);
-            db.SaveChanges();
+            var prdct = ProductService.SelectProductById(productID);
+            ProductService.DeleteProduct(prdct);
             clearTextBox();
-            ReloadList();
-            product p = this.productDataGrid.SelectedItem as product;
-            if (p != null)
-            {
-                this.product_ManufacturerTextBox2.Text = p.product_manufacturer_name;
-                this.product_NameTextBox2.Text = p.product_name;
-                this.product_CategoryTextBox2.Text = p.product_category_name;
-                this.product_PriceTextBox2.Text = p.product_price.ToString();
-                this.product_CostTextBox2.Text = p.product_cost.ToString();
-                db.product.Remove(p);
-            }
-            db.SaveChanges();
             ReloadList();
         }
         private int  productID = 0;
@@ -147,7 +126,7 @@ namespace SemesterProject_WPF_DB
         }
         private void ReloadList()
         {
-            this.productDataGrid.ItemsSource = db.product.ToList();
+            this.productDataGrid.ItemsSource = ProductService.GetList();
             AdjustColumnOrder();
         }
         private void clearTextBox()
