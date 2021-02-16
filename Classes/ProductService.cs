@@ -19,7 +19,6 @@ namespace SemesterProject_WPF_DB.Classes
             //this.productDataGrid.ItemsSource = 
             return db.product.ToList();
         }
-
         /// <summary>
         /// Create new product entity in database
         /// </summary>
@@ -42,18 +41,43 @@ namespace SemesterProject_WPF_DB.Classes
             db.SaveChanges();
         }
         /// <summary>
-        /// Removes selected product from Database
+        /// Returns product record selected by ID 
         /// </summary>
-        /// 
+        /// <param name="productID">Product ID</param>
+        /// <returns>Returns product record selected by ID </returns>
         public product SelectProductById(int productID)
         {
             var x = db.product.FirstOrDefault(y => y.product_id == productID);
             return x;
         }
-
-        public void DeleteProduct(product p)
+        /// <summary>
+        /// Remove product from Database
+        /// </summary>
+        /// <param name="p">product</param>
+        public void DeleteProduct(product prdct)
         {
-            if (p != null) db.product.Remove(p);
+            if (prdct != null) db.product.Remove(prdct);
+            db.SaveChanges();
+        }
+        /// <summary>
+        /// Updates product in Database
+        /// </summary>
+        /// <param name="prdct">Product Object</param>
+        /// <param name="priceDecimal">Product Price</param>
+        /// <param name="costDecimal">Product Cost</param>
+        /// <param name="product_category_name_">Category Name</param>
+        /// <param name="product_manufacturer_name_">Manfacturer Namee</param>
+        /// <param name="product_name_">Product Name</param>
+        public void UpdateProduct(product prdct, decimal priceDecimal, decimal costDecimal,string product_category_name_, string product_manufacturer_name_, string product_name_)
+        {
+            if (prdct != null)
+            {
+                prdct.product_category_name = product_category_name_;
+                prdct.product_manufacturer_name = product_manufacturer_name_;
+                prdct.product_name = product_name_;
+                prdct.product_price = priceDecimal;
+                prdct.product_cost = costDecimal;
+            }
             db.SaveChanges();
         }
 

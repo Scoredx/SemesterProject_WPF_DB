@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SemesterProject_WPF_DB.Classes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,11 +21,12 @@ namespace SemesterProject_WPF_DB
     /// </summary>
     public partial class productManager : Window
     {
-        Database1Entities1 db = new Database1Entities1();
+        ProductService ProductService = new ProductService();
         public productManager()
         {
             InitializeComponent();
-            this.productDataGrid.ItemsSource = db.product.ToList();
+            this.productDataGrid.ItemsSource = ProductService.GetList();
+
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -34,7 +36,7 @@ namespace SemesterProject_WPF_DB
         {
             if (product_NameTextBox2.Text != "" && product_CategoryTextBox2.Text != "" && product_ManufacturerTextBox2.Text != "" && product_PriceTextBox2.Text != "" && product_CostTextBox2.Text != "")
             {
-                var prdct = db.product.FirstOrDefault(y => y.product_id == productID);
+                var prdct = ProductService.SelectProductById(productID);
 
                 decimal priceDecimal;
                 bool priceResult = decimal.TryParse(product_PriceTextBox2.Text, out priceDecimal);
@@ -51,25 +53,15 @@ namespace SemesterProject_WPF_DB
                     MessageBox.Show("Cost must be number");
                     return;
                 }
-
-                if (prdct != null)
-                {
-                    prdct.product_category_name = this.product_CategoryTextBox2.Text;
-                    prdct.product_manufacturer_name = this.product_ManufacturerTextBox2.Text;
-                    prdct.product_name = this.product_NameTextBox2.Text;
-                    prdct.product_price = priceDecimal;
-                    prdct.product_cost = costDecimal;
-                }
-                db.SaveChanges();
+                ProductService.UpdateProduct(prdct, priceDecimal, costDecimal,product_CategoryTextBox2.Text,product_ManufacturerTextBox2.Text,product_NameTextBox2.Text);
                 ReloadList();
             }
             else MessageBox.Show("All fields must be filled");
         }
         private void button_productDelete_Click(object sender, RoutedEventArgs e)
         {
-            var prdct = db.product.FirstOrDefault(y => y.product_id == productID);
-            if (prdct != null) db.product.Remove(prdct);
-            db.SaveChanges();
+            var prdct = ProductService.SelectProductById(productID);
+            ProductService.DeleteProduct(prdct);
             clearTextBox();
             ReloadList();
         }
@@ -106,6 +98,7 @@ namespace SemesterProject_WPF_DB
             productDataGrid.Columns[3].Header = "Category";
             productDataGrid.Columns[4].Header = "Price";
             productDataGrid.Columns[5].Header = "Cost";
+
         }
         private int productID = 0;
         private void productGrid_Selection(object sender, SelectionChangedEventArgs e)
@@ -129,7 +122,7 @@ namespace SemesterProject_WPF_DB
         }
         private void ReloadList()
         {
-            this.productDataGrid.ItemsSource = db.product.ToList();
+            this.productDataGrid.ItemsSource = ProductService.GetList();
             AdjustColumnOrder();
         }
         private void clearTextBox()

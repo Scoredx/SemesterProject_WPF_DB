@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SemesterProject_WPF_DB.Classes;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -21,14 +22,13 @@ namespace SemesterProject_WPF_DB
     /// </summary>
     public partial class orderManager : Window
     {
-        Database1Entities1 db = new Database1Entities1();
-
+        OrderService OrderService = new OrderService();
         /// <summary>
-        /// Initialize UI  and  data from db with foregin keys as readable text
+        /// Initialize UI  and  data from db with foreign keys as readable text
         /// </summary>
-        
+
         /// ///<remarks>
-        /// reload list writes order data table to data grid along with informations connected to other tables with foreign keys
+        /// reload list writes order data table to data grid along with information connected to other tables with foreign keys
         /// </remarks>
         public orderManager()
         {
@@ -42,12 +42,11 @@ namespace SemesterProject_WPF_DB
             filterByWorker.Visibility = Visibility.Collapsed;
             filterByCustomer.Visibility = Visibility.Collapsed;
         }
-
         private void button_productNewProduct_Click(object sender, RoutedEventArgs e)
         {
             if (productIndex.Text != "" && customerIndex.Text != "" && workerIndex.Text != "" && deliveryIndex.Text != "")
             {
-                int productID = checkProductQan(productIndex.Text);
+                int productID = OrderService.checkProductQan(productIndex.Text);
                 if (productID == -1)
                 {
                     MessageBox.Show($"There is no such Product.");
@@ -59,7 +58,7 @@ namespace SemesterProject_WPF_DB
                     return;
                 }
 
-                int customerID = checkCustomerQan(customerIndex.Text);
+                int customerID = OrderService.checkCustomerQan(customerIndex.Text);
                 if (customerID == -1)
                 {
                     MessageBox.Show($"There is no such Customer.");
@@ -71,7 +70,7 @@ namespace SemesterProject_WPF_DB
                     return;
                 }
 
-                int workerID = checkWorkerQan(workerIndex.Text);
+                int workerID = OrderService.checkWorkerQan(workerIndex.Text);
                 if (workerID == -1)
                 {
                     MessageBox.Show($"There is no such Worker.");
@@ -83,7 +82,7 @@ namespace SemesterProject_WPF_DB
                     return;
                 }
 
-                int deliveryID = checkDeliveryTypeQan(deliveryIndex.Text);
+                int deliveryID = OrderService.checkDeliveryTypeQan(deliveryIndex.Text);
                 if (deliveryID == -1)
                 {
                     MessageBox.Show($"There is no such Delivery Type.");
@@ -101,8 +100,7 @@ namespace SemesterProject_WPF_DB
                     order_worker_id = workerID,
                     order_delivery_type_id = deliveryID
                 };
-                db.orderTable.Add(productObject);
-                db.SaveChanges();
+                OrderService.NewOrder(productObject);
                 ReloadList();
             }
             else
@@ -110,105 +108,9 @@ namespace SemesterProject_WPF_DB
                 MessageBox.Show("There is an empty field");
             }
         }
-        private int checkProductQan(string field) 
-        {
-            IQueryable<product> count1 = db.product;
-            var productsQuantity = count1.Count();
-
-            int productIndexInt;
-            bool productIntResult = int.TryParse(field, out productIndexInt);
-            if (productIntResult)
-            {
-                if (productsQuantity >= productIndexInt)
-                {
-                    return productIndexInt;
-                }
-                else
-                {
-                    return -1;
-                }
-            }
-            else
-            {
-                return 0;
-            }
-
-        }
-        private int checkCustomerQan(string field)  
-        {
-            IQueryable<customer> count1 = db.customer;
-            var productsQuantity = count1.Count();
-
-            int customerIndexInt;
-            bool customertIntResult = int.TryParse(field, out customerIndexInt);
-            if (customertIntResult)
-            {
-                if (productsQuantity >= customerIndexInt)
-                {
-                    return customerIndexInt;
-                }
-                else
-                {
-                    return -1;
-                }
-            }
-            else
-            {
-                return 0;
-            }
-
-        }
-        private int checkWorkerQan(string field) 
-        {
-            IQueryable<worker> count1 = db.worker;
-            var workerQuantity = count1.Count();
-
-            int workerIndexResult;
-            bool workerIntResult = int.TryParse(field, out workerIndexResult);
-            if (workerIntResult)
-            {
-                if (workerQuantity >= workerIndexResult)
-                {
-                    return workerIndexResult;
-                }
-                else
-                {
-                    return -1;
-                }
-            }
-            else
-            {
-                return 0;
-            }
-
-        }
-        private int checkDeliveryTypeQan(string field) 
-        {
-            IQueryable<delivery_type> count1 = db.delivery_type;
-            var productsQuantity = count1.Count();
-
-            int deliveryIndexInt;
-            bool deliveryIntResult = int.TryParse(field, out deliveryIndexInt);
-            if (deliveryIntResult)
-            {
-                if (productsQuantity >= deliveryIndexInt)
-                {
-                    return deliveryIndexInt;
-                }
-                else
-                {
-                    return -1;
-                }
-            }
-            else
-            {
-                return 0;
-            }
-
-        }
         private void SelectByProductID(object sender, RoutedEventArgs e) 
         {
-            int productID = checkProductQan(productIndex.Text);
+            int productID = OrderService.checkProductQan(productIndex.Text);
             if (productID == -1)
             {
                 MessageBox.Show($"There is no such Product.");
@@ -219,35 +121,19 @@ namespace SemesterProject_WPF_DB
                 MessageBox.Show("Product Index must be number");
                 return;
             }
-            var orders = db.orderTable
-              .Where(st => st.product.product_id == productID)
-              .Include(x => x.product)
-              .Include(x => x.customer)
-              .Include(x => x.worker)
-              .Include(x => x.delivery_type)
-              .ToList();
 
-            List<dynamic> displayItems = new List<dynamic>();
+            var orders = OrderService.GetProductById(productID);
+
+            List<OrderViewModel> displayItems = new List<OrderViewModel>();
             foreach (var order in orders)
             {
-                displayItems.Add(new
-                {
-                    order.order_id,
-                    order.product.product_id,
-                    order.product.product_name,
-                    order.customer.customer_id,
-                    order.customer.customer_name,
-                    order.customer.customer_surename,
-                    order.worker.worker_id,
-                    order.order_delivery_type_id,
-                    order.delivery_type.delivery_type1
-                });
+                displayItems.Add(new OrderViewModel(order));
             }
             this.orderDataGrid.ItemsSource = displayItems;
         }
         private void SelectByCustomerID(object sender, RoutedEventArgs e) 
         {
-            int customerID = checkCustomerQan(customerIndex.Text);
+            int customerID = OrderService.checkCustomerQan(customerIndex.Text);
             if (customerID == -1)
             {
                 MessageBox.Show($"There is no such Customer.");
@@ -258,35 +144,18 @@ namespace SemesterProject_WPF_DB
                 MessageBox.Show("Customer Index must be number");
                 return;
             }
-            var orders = db.orderTable
-              .Where(st => st.customer.customer_id == customerID)
-              .Include(x => x.product)
-              .Include(x => x.customer)
-              .Include(x => x.worker)
-              .Include(x => x.delivery_type)
-              .ToList();
+            var orders = OrderService.GetCustomertById(customerID);
 
-            List<dynamic> displayItems = new List<dynamic>();
+            List<OrderViewModel> displayItems = new List<OrderViewModel>();
             foreach (var order in orders)
             {
-                displayItems.Add(new
-                {
-                    order.order_id,
-                    order.product.product_id,
-                    order.product.product_name,
-                    order.customer.customer_id,
-                    order.customer.customer_name,
-                    order.customer.customer_surename,
-                    order.worker.worker_id,
-                    order.order_delivery_type_id,
-                    order.delivery_type.delivery_type1
-                });
+                displayItems.Add(new OrderViewModel(order));
             }
             this.orderDataGrid.ItemsSource = displayItems;
         }
         private void SelectByWorkerID(object sender, RoutedEventArgs e) 
         {
-            int workerID = checkWorkerQan(workerIndex.Text);
+            int workerID = OrderService.checkWorkerQan(workerIndex.Text);
             if (workerID == -1)
             {
                 MessageBox.Show($"There is no such Worker.");
@@ -297,35 +166,18 @@ namespace SemesterProject_WPF_DB
                 MessageBox.Show("Worker Index must be number");
                 return;
             }
-            var orders = db.orderTable
-              .Where(st => st.worker.worker_id == workerID)
-              .Include(x => x.product)
-              .Include(x => x.customer)
-              .Include(x => x.worker)
-              .Include(x => x.delivery_type)
-              .ToList();
+            var orders = OrderService.GetWorkerById(workerID);
 
-            List<dynamic> displayItems = new List<dynamic>();
+            List<OrderViewModel> displayItems = new List<OrderViewModel>();
             foreach (var order in orders)
             {
-                displayItems.Add(new
-                {
-                    order.order_id,
-                    order.product.product_id,
-                    order.product.product_name,
-                    order.customer.customer_id,
-                    order.customer.customer_name,
-                    order.customer.customer_surename,
-                    order.worker.worker_id,
-                    order.order_delivery_type_id,
-                    order.delivery_type.delivery_type1
-                });
+                displayItems.Add(new OrderViewModel(order));
             }
             this.orderDataGrid.ItemsSource = displayItems;
         }
         private void SelectByDeliveryID(object sender, RoutedEventArgs e) 
         {
-            int deliveryID = checkDeliveryTypeQan(deliveryIndex.Text);
+            int deliveryID = OrderService.checkDeliveryTypeQan(deliveryIndex.Text);
             if (deliveryID == -1)
             {
                 MessageBox.Show($"There is no such Delivery Type.");
@@ -337,56 +189,23 @@ namespace SemesterProject_WPF_DB
                 return;
             }
 
-            var orders = db.orderTable
-              .Where(st => st.delivery_type.delivery_type_id == deliveryID)
-              .Include(x => x.product)
-              .Include(x => x.customer)
-              .Include(x => x.worker)
-              .Include(x => x.delivery_type)
-              .ToList();
+            var orders = OrderService.GetDeliveryById(deliveryID);
 
-            List<dynamic> displayItems = new List<dynamic>();
+            List<OrderViewModel> displayItems = new List<OrderViewModel>();
             foreach (var order in orders)
             {
-                displayItems.Add(new
-                {
-                    order.order_id,
-                    order.product.product_id,
-                    order.product.product_name,
-                    order.customer.customer_id,
-                    order.customer.customer_name,
-                    order.customer.customer_surename,
-                    order.worker.worker_id,
-                    order.order_delivery_type_id,
-                    order.delivery_type.delivery_type1
-                });
+                displayItems.Add(new OrderViewModel(order));
             }
             this.orderDataGrid.ItemsSource = displayItems;
         }
         private void ReloadList()
         {
-            var orders = db.orderTable
-              .Include(x => x.product)
-              .Include(x => x.customer)
-              .Include(x => x.worker)
-              .Include(x => x.delivery_type)
-              .ToList();
+            var orders = OrderService.GetList();
 
             List<OrderViewModel> displayItems = new List<OrderViewModel>();
             foreach (var order in orders)
             {
-                displayItems.Add(new OrderViewModel
-                {
-                    order_id = order.order_id,
-                    product_id = order.product.product_id,
-                    product_name = order.product.product_name,
-                    customer_id = order.customer.customer_id,
-                    customer_name = order.customer.customer_name,
-                    customer_surname = order.customer.customer_surename,
-                    worker_id = order.worker.worker_id,
-                    delivery_type_id = order.order_delivery_type_id,
-                    delivery_type1 = order.delivery_type.delivery_type1
-                });
+                displayItems.Add(new OrderViewModel(order));
             }
             this.orderDataGrid.ItemsSource = displayItems;
         }
