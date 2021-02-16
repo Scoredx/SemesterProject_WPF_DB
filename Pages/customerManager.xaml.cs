@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SemesterProject_WPF_DB.Classes;
 
 namespace SemesterProject_WPF_DB
 {
@@ -19,10 +20,9 @@ namespace SemesterProject_WPF_DB
     /// </summary>
     public partial class customerManager : Window
     {
-        Database1Entities1 db = new Database1Entities1();
-
+        private CustomerService CustomerService = new CustomerService();
         /// <summary>
-        /// Initializes UI elements and puts the data from customer Table into datagrid using a public class as an Object
+        /// Initializes UI elements and puts the data from customer Table into dataGrid using a public class as an Object
         /// </summary>
         public customerManager()
         {
@@ -42,7 +42,7 @@ namespace SemesterProject_WPF_DB
             if (customer_nameTextBox.Text != "" && customer_surnameTextBox.Text != "" && customer_address_idTextBox.Text != "" && customer_phoneTextBox.Text != "")
             {
                 customer customerObj = new customer();
-                int addressInt = checkAddresstQan(customer_address_idTextBox.Text);
+                int addressInt = CustomerService.checkAddresstQan(customer_address_idTextBox.Text);
                 if (addressInt == -1)
                 {
                     MessageBox.Show($"There is no such address ID.");
@@ -55,14 +55,18 @@ namespace SemesterProject_WPF_DB
                 }
                 int phoneInt;
                 bool phoneResult = int.TryParse(customer_phoneTextBox.Text, out phoneInt);
-                if (!phoneResult)
+                if(phoneResult)
                 {
-                    if (phoneInt >= 1_000_000_000 || phoneInt <= 99_999_999)
+                    int phoneLength = phoneInt.ToString().ToCharArray().Length;
+                    if (phoneLength <= 8 || phoneLength >= 10)
                     {
                         MessageBox.Show("Invalid Phone number length.");
                         return;
                     }
-                    MessageBox.Show("Phone number must cointain only digits");
+                }
+                else
+                {
+                    MessageBox.Show("Phone number must contain only digits");
                     return;
                 }
                 if (customerObj != null)
@@ -74,8 +78,7 @@ namespace SemesterProject_WPF_DB
                     customerObj.customer_email = this.customer_emailTextBox.Text;
                     customerObj.customer_nip = this.customer_nipTextBox.Text;
                 }
-                db.customer.Add(customerObj);
-                db.SaveChanges();
+                CustomerService.NewCustomer(customerObj);
                 clearTextBox();
                 ReloadList();
             }
@@ -88,8 +91,8 @@ namespace SemesterProject_WPF_DB
         {
             if (customer_nameTextBox.Text != "" && customer_surnameTextBox.Text != "" && customer_address_idTextBox.Text != "" && customer_phoneTextBox.Text != "")
             {
-                var customerObject = db.customer.FirstOrDefault(y => y.customer_id == customerID);
-                int addressInt = checkAddresstQan(customer_address_idTextBox.Text);
+                var customerObject = CustomerService.SelectCustomerById(customerID);
+                int addressInt = CustomerService.checkAddresstQan(customer_address_idTextBox.Text);
                 if (addressInt == -1)
                 {
                     MessageBox.Show($"There is no such address ID.");
@@ -97,31 +100,26 @@ namespace SemesterProject_WPF_DB
                 }
                 else if (addressInt == 0)
                 {
-                    MessageBox.Show("Adress ID must contain only digits.");
+                    MessageBox.Show("Address ID must contain only digits.");
                     return;
                 }
                 int phoneInt;
                 bool phoneResult = int.TryParse(customer_phoneTextBox.Text, out phoneInt);
-                if (!phoneResult)
+                if (phoneResult)
                 {
-                    if(phoneInt >= 1_000_000_000 || phoneInt <= 99_999_999)
+                    int phoneLength = phoneInt.ToString().ToCharArray().Length;
+                    if(phoneLength <= 8 || phoneLength >= 10)
                     {
                         MessageBox.Show("Invalid Phone number length.");
                         return;
                     }
-                    MessageBox.Show("Phone number must cointain only digits");
+                }
+                else
+                {
+                    MessageBox.Show("Phone number must contain only digits");
                     return;
                 }
-                if (customerObject != null)
-                {
-                    customerObject.customer_name = this.customer_nameTextBox.Text;
-                    customerObject.customer_surename = this.customer_surnameTextBox.Text;
-                    customerObject.customer_address_id = addressInt;
-                    customerObject.customer_phone = phoneInt;
-                    customerObject.customer_email = this.customer_emailTextBox.Text;
-                    customerObject.customer_nip = this.customer_nipTextBox.Text;
-                }
-                db.SaveChanges();
+                CustomerService.UpdateCustomer(customerObject, this.customer_nameTextBox.Text, this.customer_surnameTextBox.Text, addressInt, phoneInt, this.customer_emailTextBox.Text, this.customer_nipTextBox.Text);
                 clearTextBox();
                 ReloadList();
             }
@@ -129,12 +127,8 @@ namespace SemesterProject_WPF_DB
         }
         private void button_deleteCustomer_Click(object sender, RoutedEventArgs e)
         {
-            var custmr = db.customer.FirstOrDefault(y => y.customer_id == customerID);
-            if(custmr != null)
-            {
-                db.customer.Remove(custmr);
-            }
-            db.SaveChanges();
+            var cstmr = CustomerService.SelectCustomerById(customerID);
+            CustomerService.DeleteCustomer(cstmr);
             clearTextBox();
             ReloadList();
         }
@@ -160,47 +154,13 @@ namespace SemesterProject_WPF_DB
             this.customer_nipTextBox.Text = p.customer_nip;
             this.customerID = p.customer_id;
         }
-        private int checkAddresstQan(string field) 
+        private void ReloadList()
         {
-            IQueryable<addressTable> count1 = db.addressTable;
-            var addressQuantity = count1.Count();
-            int addressIndexInt;
-            bool addressIntResult = int.TryParse(field, out addressIndexInt);
-            if (addressIntResult)
-            {
-                if (addressQuantity >= addressIndexInt)
-                {
-                    return addressIndexInt;
-                }
-                else
-                {
-                    return -1;
-                }
-            }
-            else
-            {
-                return 0;
-            }
-        }
-        private void ReloadList() 
-        {
-            var customers = db.customer
-              .Include("addressTable")
-              .ToList();
+            var customers = CustomerService.GetList();
             List<CustomerViewModel> displayItems = new List<CustomerViewModel>();
             foreach (var customer in customers)
             {
-                displayItems.Add(new CustomerViewModel
-                {
-                    customer_id = customer.customer_id,
-                    customer_name = customer.customer_name,
-                    customer_surname = customer.customer_surename,
-                    address_id = customer.addressTable.address_id,
-                    address_city = customer.addressTable.address_city,
-                    customer_phone = customer.customer_phone,
-                    customer_email = customer.customer_email,
-                    customer_nip = customer.customer_nip,
-                });
+                displayItems.Add(new CustomerViewModel(customer) );
             }
             this.customerDataGrid.ItemsSource = displayItems;
         }
@@ -213,7 +173,6 @@ namespace SemesterProject_WPF_DB
             this.customer_emailTextBox.Text = string.Empty;
             this.customer_nipTextBox.Text = string.Empty;
         }
-
         private void button_Exit(object sender, RoutedEventArgs e)
         {
             this.Close();

@@ -10,7 +10,6 @@ namespace SemesterProject_WPF_DB.Classes
     class OrderService
     {
         Database1Entities1 db = new Database1Entities1();
-
         /// <summary>
         /// Create new Order
         /// </summary>
@@ -185,7 +184,6 @@ namespace SemesterProject_WPF_DB.Classes
                 .ToList();
             return list;
         }
-
         public List<orderTable> GetList()
         {
             var list = db.orderTable
