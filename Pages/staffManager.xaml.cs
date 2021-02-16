@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SemesterProject_WPF_DB.Classes;
 
 namespace SemesterProject_WPF_DB
 {
@@ -20,10 +21,10 @@ namespace SemesterProject_WPF_DB
     /// </summary>
     public partial class staffManager : Window
     {
-        Database1Entities1 db = new Database1Entities1();
+        WorkerService WorkerService = new WorkerService();
 
         /// <summary>
-        /// Initializes UI and puts the data from worker Table into datagrid using a public class as an Object
+        /// Initializes UI and puts the data from worker Table into dataGrid using a public class as an Object
         /// </summary>
         public staffManager()
         {
@@ -42,28 +43,27 @@ namespace SemesterProject_WPF_DB
         {
             if (worker_nameTextBox.Text != "" && worker_surnameTextBox.Text != "" && worker_peselTextBox.Text != "")
             {
-                worker customerObj = new worker();
-                var x = this.worker_peselTextBox.Text.Count();
-                if (x != 11)
-                {
-                    MessageBox.Show("Pesel must have 11 digits");
-                    return;
-                }
-                long workerInt;
-                bool workerIntResult = long.TryParse(worker_peselTextBox.Text, out workerInt);
-                if (!workerIntResult)
+                worker workerObject = new worker();
+                long peselInt;
+                bool peselIntResult = long.TryParse(worker_peselTextBox.Text, out peselInt);
+                if (!peselIntResult)
                 {
                     MessageBox.Show("Pesel must be a number");
                     return;
                 }
-                if (customerObj != null)
+                var peselLength = worker_peselTextBox.Text.Length;
+                if (peselLength != 11)
                 {
-                    customerObj.worker_name = this.worker_nameTextBox.Text;
-                    customerObj.worker_surename = this.worker_surnameTextBox.Text;
-                    customerObj.worker_pesel = workerInt.ToString();
+                    MessageBox.Show("Invalid Pesel length, must be 11 digits!");
+                    return;
                 }
-                db.worker.Add(customerObj);
-                db.SaveChanges();
+                if (workerObject != null)
+                {
+                    workerObject.worker_name = this.worker_nameTextBox.Text;
+                    workerObject.worker_surename = this.worker_surnameTextBox.Text;
+                    workerObject.worker_pesel = peselInt.ToString();
+                }
+                WorkerService.NewWorker(workerObject);
                 clearTextBox();
                 ReloadList();
             }
@@ -76,15 +76,22 @@ namespace SemesterProject_WPF_DB
         {
             if (worker_nameTextBox.Text != "" && worker_surnameTextBox.Text != "" && worker_peselTextBox.Text != "")
             {
-                var customerObject = db.worker.FirstOrDefault(y => y.worker_id == workerID);
+                var workerObject = WorkerService.SelectWorkerById(workerID);
 
-                if (customerObject != null)
+                long peselInt;
+                bool peselIntResult = long.TryParse(worker_peselTextBox.Text, out peselInt);
+                if (!peselIntResult)
                 {
-                    customerObject.worker_name = this.worker_nameTextBox.Text;
-                    customerObject.worker_surename = this.worker_surnameTextBox.Text;
-                    customerObject.worker_pesel = this.worker_peselTextBox.Text;
+                    MessageBox.Show("Pesel must be a number");
+                    return;
                 }
-                db.SaveChanges();
+                var peselLength = worker_peselTextBox.Text.Length;
+                if (peselLength != 11)
+                {
+                    MessageBox.Show("Invalid Pesel length, must be 11 digits!");
+                    return;
+                }
+                WorkerService.UpdateWorker(workerObject, worker_nameTextBox.Text, worker_surnameTextBox.Text, worker_peselTextBox.Text);
                 clearTextBox();
                 ReloadList();
             }
@@ -92,9 +99,8 @@ namespace SemesterProject_WPF_DB
         }
         private void button_deleteWorker_Click(object sender, RoutedEventArgs e)
         {
-            var custmr = db.worker.FirstOrDefault(y => y.worker_id == workerID);
-            if (custmr != null) db.worker.Remove(custmr);
-            db.SaveChanges();
+            var worker = WorkerService.SelectWorkerById(workerID);
+            WorkerService.RemoveWorker(worker);
             clearTextBox();
             ReloadList();
         }
@@ -116,20 +122,8 @@ namespace SemesterProject_WPF_DB
         }
         private void ReloadList()
         {
-            var customers = db.worker
-              .ToList();
-            List<WorkerViewModel> displayItems = new List<WorkerViewModel>();
-            foreach (var worker in customers)
-            {
-                displayItems.Add(new WorkerViewModel
-                {
-                    worker_id = worker.worker_id,
-                    worker_name = worker.worker_name,
-                    worker_surname = worker.worker_surename,
-                    worker_pesel = worker.worker_pesel
-                });
-            }
-            this.workerDataGrid.ItemsSource = displayItems;
+        
+            this.workerDataGrid.ItemsSource = WorkerService.GetList();
         }
         private void clearTextBox()
         {

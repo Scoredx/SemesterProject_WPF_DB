@@ -54,6 +54,8 @@ namespace SemesterProject_WPF_DB
                     return;
                 }
                 ProductService.UpdateProduct(prdct, priceDecimal, costDecimal,product_CategoryTextBox2.Text,product_ManufacturerTextBox2.Text,product_NameTextBox2.Text);
+                
+                
                 ReloadList();
             }
             else MessageBox.Show("All fields must be filled");
