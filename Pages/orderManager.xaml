@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="TSM: Order Manager" Height="500" Width="1000" Loaded="Window_Loaded" Icon="../Images/logo.ico">
     <Grid Background="#FF66BCF4">
-        <DataGrid x:Name="orderDataGrid" HorizontalAlignment="Left" Height="449" Margin="10,10,0,0" VerticalAlignment="Top" Width="706"  CanUserResizeColumns="False" MinColumnWidth="17" IsReadOnly="true"/>
+        <DataGrid x:Name="orderDataGrid" HorizontalAlignment="Left" Height="449" Margin="10,10,0,0" VerticalAlignment="Top" Width="706"  CanUserResizeColumns="False" MinColumnWidth="17" IsReadOnly="true" SelectionChanged="orderGrid_Selection"/>
 
         <Button x:Name="button_CreateNewOrder"  Content="Create New Order" HorizontalAlignment="Left" Height="34" Margin="743,130,0,0" VerticalAlignment="Top" Width="211" Click="button_productNewProduct_Click" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Background="White">
             <Button.Resources>
@@ -70,6 +70,13 @@
             </Button.Resources>
         </Button>
         <Button x:Name="button_productCancel" Content="Exit"  FontSize="16" Click="button_closeWindow_Click" Margin="743,380,34,46" Background="White" FontFamily="Consolas" FontWeight="Bold">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Content="Delete Order" HorizontalAlignment="Left" Height="43" Margin="743,284,0,0" VerticalAlignment="Top" Width="215" FontFamily="Consolas" FontSize="16" FontWeight="Bold" Background="White" Click="button_deleteOrder">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

@@ -17,10 +17,6 @@ namespace SemesterProject_WPF_DB
         public string customer_email { get; set; }
         public string customer_nip { get; set; }
 
-        /// <summary>
-        /// Signs values to customer object
-        /// </summary>
-        /// <param name="customer">Customer</param>
         public CustomerViewModel(customer customer)
         {
             customer_id = customer.customer_id;

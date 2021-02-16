@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace SemesterProject_WPF_DB.Classes
 {
@@ -16,7 +17,6 @@ namespace SemesterProject_WPF_DB.Classes
         /// <returns>List of products in Database</returns>
         public List<product> GetList()
         {
-            //this.productDataGrid.ItemsSource = 
             return db.product.ToList();
         }
         /// <summary>
@@ -56,8 +56,9 @@ namespace SemesterProject_WPF_DB.Classes
         /// <param name="p">product</param>
         public void DeleteProduct(product prdct)
         {
-            if (prdct != null) db.product.Remove(prdct);
-            db.SaveChanges();
+                if (prdct != null) db.product.Remove(prdct);
+                db.SaveChanges();
+           
         }
         /// <summary>
         /// Updates product in Database
@@ -66,7 +67,7 @@ namespace SemesterProject_WPF_DB.Classes
         /// <param name="priceDecimal">Product Price</param>
         /// <param name="costDecimal">Product Cost</param>
         /// <param name="product_category_name_">Category Name</param>
-        /// <param name="product_manufacturer_name_">Manfacturer Namee</param>
+        /// <param name="product_manufacturer_name_">Manufacturer Name</param>
         /// <param name="product_name_">Product Name</param>
         public void UpdateProduct(product prdct, decimal priceDecimal, decimal costDecimal,string product_category_name_, string product_manufacturer_name_, string product_name_)
         {

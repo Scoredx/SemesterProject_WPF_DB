@@ -136,9 +136,9 @@ namespace SemesterProject_WPF_DB.Classes
 
         }
         /// <summary>
-        /// Get order table data filtered by choosen ID 
+        /// Get product data filtered by chosen ID 
         /// </summary>
-        /// <param name="ID"></param>
+        /// <param name="ID">index</param>
         /// <returns></returns>
         public List<orderTable> GetProductById(int ID)
         {
@@ -151,6 +151,11 @@ namespace SemesterProject_WPF_DB.Classes
             .ToList();
             return list;
         }
+        /// <summary>
+        /// Get customer data filtered by chosen ID 
+        /// </summary>
+        /// <param name="ID">index</param>
+        /// <returns></returns>
         public List<orderTable> GetCustomertById(int ID)
         {
             var list = db.orderTable
@@ -162,6 +167,11 @@ namespace SemesterProject_WPF_DB.Classes
                 .ToList();
             return list;
         }
+        /// <summary>
+        /// Get worker data filtered by chosen ID 
+        /// </summary>
+        /// <param name="ID">index</param>
+        /// <returns></returns>
         public List<orderTable> GetWorkerById(int ID)
         {
             var list = db.orderTable
@@ -173,6 +183,11 @@ namespace SemesterProject_WPF_DB.Classes
                 .ToList();
             return list;
         }
+        /// <summary>
+        /// Get delivery table data filtered by chosen ID 
+        /// </summary>
+        /// <param name="ID">index</param>
+        /// <returns></returns>
         public List<orderTable> GetDeliveryById(int ID)
         {
             var list = db.orderTable
@@ -194,5 +209,20 @@ namespace SemesterProject_WPF_DB.Classes
                 .ToList();
             return list;
         }
+        /// <summary>
+        /// Deletes entity from orderTable
+        /// </summary>
+        /// <param name="order">orderTable Object</param>
+        public void DeleteOrder(orderTable order)
+        {
+            if (order != null) db.orderTable.Remove(order);
+            db.SaveChanges();
+        }
+        /// <summary>
+        /// Select order by order Id
+        /// </summary>
+        /// <param name="orderID">Order Index</param>
+        /// <returns></returns>
+        public orderTable SelectOrderById(int orderID) => db.orderTable.FirstOrDefault(y => y.order_id == orderID);
     }
 }

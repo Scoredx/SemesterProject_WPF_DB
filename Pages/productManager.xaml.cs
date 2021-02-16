@@ -45,7 +45,6 @@ namespace SemesterProject_WPF_DB
                     MessageBox.Show("Price must be number");
                     return;
                 }
-
                 decimal costDecimal;
                 bool costResult = decimal.TryParse(product_CostTextBox2.Text, out costDecimal);
                 if (!costResult)
@@ -53,27 +52,34 @@ namespace SemesterProject_WPF_DB
                     MessageBox.Show("Cost must be number");
                     return;
                 }
+                if (priceDecimal < 0)
+                {
+                    MessageBox.Show("Price can not be less than 0.");
+                    return;
+                }
+                if (costDecimal < 0)
+                {
+                    MessageBox.Show("Cost can not be less than 0.");
+                    return;
+                }
                 ProductService.UpdateProduct(prdct, priceDecimal, costDecimal,product_CategoryTextBox2.Text,product_ManufacturerTextBox2.Text,product_NameTextBox2.Text);
-                
-                
                 ReloadList();
             }
             else MessageBox.Show("All fields must be filled");
         }
         private void button_productDelete_Click(object sender, RoutedEventArgs e)
         {
-            var prdct = ProductService.SelectProductById(productID);
-            ProductService.DeleteProduct(prdct);
+            try
+            {
+                var prdct = ProductService.SelectProductById(productID);
+                ProductService.DeleteProduct(prdct);
+            }
+            catch (InvalidOperationException)
+            {
+                MessageBox.Show("Can not remove product that is signed to order");
+            }
             clearTextBox();
             ReloadList();
-        }
-        private void button_productReload_Click(object sender, RoutedEventArgs e)
-        {
-            ReloadList();
-        }
-        private void button_closeWindow_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
         private void AdjustColumnOrder()
         {
@@ -122,11 +128,7 @@ namespace SemesterProject_WPF_DB
             this.product_CostTextBox2.Text = p.product_cost.ToString();
             this.productID = p.product_id;
         }
-        private void ReloadList()
-        {
-            this.productDataGrid.ItemsSource = ProductService.GetList();
-            AdjustColumnOrder();
-        }
+        
         private void clearTextBox()
         {
             this.product_ManufacturerTextBox2.Text = string.Empty;
@@ -134,6 +136,19 @@ namespace SemesterProject_WPF_DB
             this.product_CategoryTextBox2.Text = string.Empty;
             this.product_PriceTextBox2.Text = string.Empty.ToString();
             this.product_CostTextBox2.Text = string.Empty.ToString();
+        }
+        private void button_productReload_Click(object sender, RoutedEventArgs e)
+        {
+            ReloadList();
+        }
+        private void button_closeWindow_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+        private void ReloadList()
+        {
+            this.productDataGrid.ItemsSource = ProductService.GetList();
+            AdjustColumnOrder();
         }
     }
 }

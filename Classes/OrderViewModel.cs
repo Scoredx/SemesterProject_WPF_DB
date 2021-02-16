@@ -18,7 +18,6 @@ namespace SemesterProject_WPF_DB
         public int delivery_type_id { get; set; }
         public string delivery_type1 { get; set; }
 
-
         public OrderViewModel(orderTable order)
         {
             order_id = order.order_id;

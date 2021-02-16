@@ -1,6 +1,17 @@
-﻿using SemesterProject_WPF_DB.Classes;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using SemesterProject_WPF_DB.Classes;
 
 namespace SemesterProject_WPF_DB
 {
@@ -221,6 +232,32 @@ namespace SemesterProject_WPF_DB
         private void button_closeWindow_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private int orderID = 0;
+        private void orderGrid_Selection(object sender, SelectionChangedEventArgs e)
+        {
+            OrderViewModel p = this.orderDataGrid.SelectedItem as OrderViewModel;
+            if (p is null)
+            {
+                this.productIndex.Text = string.Empty;
+                this.customerIndex.Text = string.Empty;
+                this.workerIndex.Text = string.Empty;
+                this.deliveryIndex.Text = string.Empty;
+                return;
+            }
+            this.productIndex.Text = p.product_id.ToString();
+            this.customerIndex.Text = p.customer_id.ToString();
+            this.workerIndex.Text = p.worker_id.ToString();
+            this.deliveryIndex.Text = p.delivery_type_id.ToString();
+            this.orderID = p.order_id;
+        }
+
+        private void button_deleteOrder(object sender, RoutedEventArgs e)
+        {
+            var order = OrderService.SelectOrderById(orderID);
+            OrderService.DeleteOrder(order);
+            ReloadList();
         }
     }
 }

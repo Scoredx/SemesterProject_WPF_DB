@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,7 +60,15 @@ namespace SemesterProject_WPF_DB
                     workerObject.worker_surename = this.worker_surnameTextBox.Text;
                     workerObject.worker_pesel = peselInt.ToString();
                 }
-                WorkerService.NewWorker(workerObject);
+                try
+                {
+                    WorkerService.NewWorker(workerObject);
+
+                }
+                catch (DbUpdateException)
+                {
+                    MessageBox.Show("Pesel can not repeat");
+                }
                 clearTextBox();
                 ReloadList();
             }
@@ -100,10 +109,11 @@ namespace SemesterProject_WPF_DB
             clearTextBox();
             ReloadList();
         }
+
         private int workerID = 0;
         private void workerGrid_Selection(object sender, SelectionChangedEventArgs e)
         {
-            WorkerViewModel p = this.workerDataGrid.SelectedItem as WorkerViewModel;
+            worker p = this.workerDataGrid.SelectedItem as worker;
             if (p is null)
             {
                 this.worker_nameTextBox.Text = string.Empty;
@@ -112,7 +122,7 @@ namespace SemesterProject_WPF_DB
                 return;
             }
             this.worker_nameTextBox.Text = p.worker_name;
-            this.worker_surnameTextBox.Text = p.worker_surname;
+            this.worker_surnameTextBox.Text = p.worker_surename;
             this.worker_peselTextBox.Text = p.worker_pesel.ToString();
             this.workerID = p.worker_id;
         }
@@ -134,6 +144,5 @@ namespace SemesterProject_WPF_DB
         {
             ReloadList();
         }
-
     }
 }
