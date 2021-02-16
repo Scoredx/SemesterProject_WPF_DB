@@ -35,10 +35,6 @@ namespace SemesterProject_WPF_DB
         {
 
         }
-        private void button_ReloadList(object sender, RoutedEventArgs e)
-        {
-            ReloadList();
-        }
         private void button_createNewWorker_click(object sender, RoutedEventArgs e)
         {
             if (worker_nameTextBox.Text != "" && worker_surnameTextBox.Text != "" && worker_peselTextBox.Text != "")
@@ -122,7 +118,6 @@ namespace SemesterProject_WPF_DB
         }
         private void ReloadList()
         {
-        
             this.workerDataGrid.ItemsSource = WorkerService.GetList();
         }
         private void clearTextBox()
@@ -135,5 +130,10 @@ namespace SemesterProject_WPF_DB
         {
             this.Close();
         }
+        private void button_ReloadList(object sender, RoutedEventArgs e)
+        {
+            ReloadList();
+        }
+
     }
 }
