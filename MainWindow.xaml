@@ -7,7 +7,7 @@
         mc:Ignorable="d"        
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="Techmaker ShopManager" Height="509" Width="500" Loaded="Window_Loaded"  ShowInTaskbar="False">
+        Title="Techmaker ShopManager" Height="509" Width="500" Loaded="Window_Loaded"  ShowInTaskbar="False" Icon="./Images/logo.ico">
     <Window.Resources>
         <CollectionViewSource x:Key="customerViewSource" d:DesignSource="{d:DesignInstance {x:Type local:customer}, CreateList=True}"/>
         <CollectionViewSource x:Key="customerorderTableViewSource" Source="{Binding orderTable, Source={StaticResource customerViewSource}}"/>
