@@ -65,11 +65,17 @@ namespace SemesterProject_WPF_DB
         }
         private void button_productDelete_Click(object sender, RoutedEventArgs e)
         {
+            try { 
             var prdct = ProductService.SelectProductById(productID);
             ProductService.DeleteProduct(prdct);
             clearTextBox();
             ReloadList();
-        }
+            }
+            catch (InvalidOperationException)
+            {
+                MessageBox.Show("Can not remove product that is signed to order");
+            }
+}
         private int  productID = 0;
         private void productGrid_Selection(object sender, SelectionChangedEventArgs e)
         {

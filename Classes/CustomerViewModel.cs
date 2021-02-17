@@ -12,7 +12,6 @@ namespace SemesterProject_WPF_DB
         public string customer_name { get; set; }
         public string customer_surname { get; set; }
         public int address_id { get; set; }
-        public string address_city { get; set; }
         public int customer_phone { get; set; }
         public string customer_email { get; set; }
         public string customer_nip { get; set; }
@@ -22,8 +21,7 @@ namespace SemesterProject_WPF_DB
             customer_id = customer.customer_id;
             customer_name = customer.customer_name;
             customer_surname = customer.customer_surename;
-            address_id = customer.addressTable.address_id;
-            address_city = customer.addressTable.address_city;
+            address_id = customer.customer_address_id;
             customer_phone = customer.customer_phone;
             customer_email = customer.customer_email;
             customer_nip = customer.customer_nip;

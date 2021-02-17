@@ -104,10 +104,19 @@ namespace SemesterProject_WPF_DB
         }
         private void button_deleteWorker_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+
+            
             var worker = WorkerService.SelectWorkerById(workerID);
             WorkerService.RemoveWorker(worker);
             clearTextBox();
             ReloadList();
+            }
+            catch (InvalidOperationException)
+            {
+                MessageBox.Show("Can not remove worker that is signed to order");
+            }
         }
 
         private int workerID = 0;

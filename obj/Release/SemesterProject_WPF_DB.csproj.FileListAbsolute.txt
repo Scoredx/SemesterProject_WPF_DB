@@ -1,5 +1,6 @@
 E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\bin\Release\Database1.mdf
 E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\bin\Release\Database1_log.ldf
+E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\bin\Release\App.config
 E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\bin\Release\SemesterProject_WPF_DB.exe.config
 E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\bin\Release\SemesterProject_WPF_DB.exe
 E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\bin\Release\SemesterProject_WPF_DB.pdb
@@ -7,7 +8,6 @@ E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\bin\Release\EntityFramework.dll
 E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\bin\Release\EntityFramework.SqlServer.dll
 E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\bin\Release\EntityFramework.xml
 E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\bin\Release\EntityFramework.SqlServer.xml
-E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\obj\Release\SemesterProject_WPF_DB.csprojAssemblyReference.cache
 E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\obj\Release\Pages\customerManager.g.cs
 E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\obj\Release\MainWindow.g.cs
 E:\Visual Studio 2019\C#\SemesterProject_WPF_DB\obj\Release\Pages\newDelivery.g.cs

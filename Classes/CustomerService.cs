@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Data.Common;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,14 +39,23 @@ namespace SemesterProject_WPF_DB.Classes
         /// <param name="customer">Customer</param>
         public void DeleteCustomer(customer customer)
         {
-            if (customer != null)
+            try
             {
-                db.customer.Remove(customer);
-                db.SaveChanges();
+                if (customer != null)
+                {
+                    db.customer.Remove(customer);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    MessageBox.Show("Customer is null");
+                    return;
+                }
             }
-            else
+            catch (DbUpdateException)
             {
-                MessageBox.Show("Customer is null");
+                MessageBox.Show("Can not remove customer that is signed to order");
+                return;
             }
         }
         /// <summary>
